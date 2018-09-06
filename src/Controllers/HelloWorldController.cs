@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Localization;
 using System.Text.Encodings.Web;
 
 namespace TrainingNet.Controllers
@@ -6,6 +7,13 @@ namespace TrainingNet.Controllers
     [Route("[controller]")]
     public class HelloWorldController : Controller
     {
+
+        private readonly IHtmlLocalizer<HomeController> _localizer;
+
+        public HelloWorldController(IHtmlLocalizer<HomeController> localizer){
+            this._localizer = localizer;
+        }
+        // 
         // GET: /HelloWorld/
         [HttpGet("")]
         [HttpGet("Index")]
@@ -18,7 +26,7 @@ namespace TrainingNet.Controllers
         [HttpGet("Welcome/{id?}")]
         public IActionResult Welcome(string name, int numTimes = 1)
         {
-            ViewData["Message"] = "Hello " + name;
+            ViewData["Message"] = _localizer["Greeting"].Value + name;
             ViewData["NumTimes"] = numTimes;
 
             return View();

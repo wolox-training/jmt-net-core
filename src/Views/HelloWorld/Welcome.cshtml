@@ -1,9 +1,13 @@
 @{
     ViewData["Title"] = "Welcome";
 }
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+
 <h2>Welcome</h2>
 <ul>
     @for(int i = 0; i < (int) ViewData["NumTimes"]; i++){
         <li>@ViewData["Message"]</li>
+        <li>@Localizer["GlobMessage"]</li>
     }
 </ul>
