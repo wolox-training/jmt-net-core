@@ -1,9 +1,14 @@
 {
     "Greeting": "Hello ",
     "GlobMessage": "Those damn globalists",
+<<<<<<< 44ee187428a4683b62037806baa1cbb14e0cedaf
     "Title": "title",
     "ReleaseDate": "release Date",
     "Genre": "genre",
     "Price": "price",
     "HomePage": "Home Page"
 }
+=======
+    "HomePage": "Home Page"
+}
+>>>>>>> finished Repository pattern card
