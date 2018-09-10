@@ -49,7 +49,7 @@ namespace TrainingNet.Controllers
                 return NotFound();
             }
         }
-
+        
         [HttpPost("EditMovie/{id?}")]
         public IActionResult EditMovie(MovieViewModel movie, int id){
             try{
