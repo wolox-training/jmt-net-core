@@ -1,5 +1,9 @@
 {
     "Greeting": "Hello ",
     "GlobMessage": "Those damn globalists",
+    "Title": "title",
+    "ReleaseDate": "release Date",
+    "Genre": "genre",
+    "Price": "price",
     "HomePage": "Home Page"
 }
