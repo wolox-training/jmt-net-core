@@ -1,7 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.EntityFrameworkCore;
 using TrainingNet.Models.DataBase;
+using TrainingNet.Models.Views;
 using TrainingNet.Repositories;
 using TrainingNet.Repositories.Database;
 using TrainingNet.Repositories.Interfaces;
@@ -21,7 +25,7 @@ namespace TrainingNet.Controllers
         [HttpGet("Add")]
         public IActionResult Add()
         {
-            return View();
+            return View(new MovieViewModel());
         }
 
         [HttpPost("Add")]

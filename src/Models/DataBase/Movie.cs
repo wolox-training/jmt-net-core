@@ -5,7 +5,13 @@ namespace TrainingNet.Models.DataBase
 {
     public class Movie
     {
-        public int Id { get; set; }
+        public void Update(MovieViewModel movieViewModel){
+            Title = movieViewModel.Title;
+            ReleaseDate = movieViewModel.ReleaseDate;
+            Genre = movieViewModel.Genre;
+            Price = movieViewModel.Price;
+        }
+        public int ID { get; set; }
         public string Title { get; set; }
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
