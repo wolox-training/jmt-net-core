@@ -36,6 +36,36 @@ namespace TrainingNet.Controllers
             return View();
         }
 
+        [HttpGet("EditMovie/{id?}")]
+        public IActionResult EditMovie(int id)
+        {
+            try{
+                if(id == 0)
+                    throw new NullReferenceException("The movie was not found");
+                Movie movie = UnitOfWork.Movies.Get(id);
+                var movieViewModel = new MovieViewModel(movie);
+                return View(movieViewModel);
+            }
+            catch(NullReferenceException n){
+                return NotFound();
+            }
+        }
+        [HttpPost("EditMovie/{id?}")]
+        public IActionResult EditMovie(MovieViewModel movie, int id){
+            try{
+                if(id == 0)
+                    throw new NullReferenceException("The movie was not found");
+                Movie movieToBeChanged = UnitOfWork.Movies.Get(id);
+                movieToBeChanged.Update(movie);
+                UnitOfWork.Movies.Update(movieToBeChanged);
+                UnitOfWork.Complete();
+                return RedirectToAction("EditMovie");
+            }
+            catch(NullReferenceException n){
+                return NotFound();
+            }
+        }
+
         private IUnitOfWork UnitOfWork
         {
            get { return this._unitOfWork; }
