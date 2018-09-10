@@ -108,6 +108,11 @@ namespace TrainingNet.Controllers
             }
         }
 
+        [HttpGet("ListMovies")]
+        public IActionResult ListMovies(){
+            IEnumerable movieList = UnitOfWork.Movies.GetAll();
+            return View(movieList);
+        }
         private IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
