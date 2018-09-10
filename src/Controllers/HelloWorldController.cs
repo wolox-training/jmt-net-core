@@ -19,7 +19,7 @@ namespace TrainingNet.Controllers
         {
             return View();
         }
-
+        
         [HttpGet("Welcome/{id?}")]
         public IActionResult Welcome(string name, int numTimes = 1)
         {
