@@ -13,7 +13,7 @@ namespace TrainingNet.Controllers
     {
         private readonly IHtmlLocalizer<HomeController> _localizer;
         private readonly IUnitOfWork _unitOfWork;
-
+        
         public MovieController(IHtmlLocalizer<HomeController> localizer, IUnitOfWork unitOfWork){
             this._localizer = localizer;
             this._unitOfWork = unitOfWork;
