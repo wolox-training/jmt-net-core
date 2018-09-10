@@ -1,8 +1,15 @@
+<<<<<<< a467b7a3280be1a2ec87903536609219f169122f
 @using TrainingNet.Models.Views
 @model System.Collections.Generic.IEnumerable<MovieViewModel>
 
 <table class="table">
 
+=======
+@using TrainingNet.Models.DataBase
+@model System.Collections.Generic.IEnumerable<Movie>
+
+<table class="table">
+>>>>>>> added ListMovies.cshtml
     <thead>
         <tr>
                 <th>
@@ -36,13 +43,20 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
+<<<<<<< a467b7a3280be1a2ec87903536609219f169122f
                 <a asp-action="EditMovie" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="DeleteMovie" asp-route-id="@item.Id">Delete</a>
+=======
+                <a asp-action="EditMovie" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+>>>>>>> added ListMovies.cshtml
             </td>
         </tr>
 }
     </tbody>
+<<<<<<< a467b7a3280be1a2ec87903536609219f169122f
 
 </table>
     <form asp-action="ListMovies" asp-controller="Movie" method="GET">
@@ -54,3 +68,6 @@
         </p>
         <input type="submit" value="Filter" />
     </form>
+=======
+</table>
+>>>>>>> added ListMovies.cshtml
