@@ -7,14 +7,12 @@ namespace TrainingNet.Controllers
     [Route("[controller]")]
     public class HelloWorldController : Controller
     {
-
         private readonly IHtmlLocalizer<HomeController> _localizer;
-
-        public HelloWorldController(IHtmlLocalizer<HomeController> localizer){
+        public HelloWorldController(IHtmlLocalizer<HomeController> localizer)
+        {
             this._localizer = localizer;
         }
-        
-        // GET: /HelloWorld/
+
         [HttpGet("")]
         [HttpGet("Index")]
         public IActionResult Index()
@@ -22,13 +20,11 @@ namespace TrainingNet.Controllers
             return View();
         }
 
-        // GET: /HelloWorld/Welcome/ 
         [HttpGet("Welcome/{id?}")]
         public IActionResult Welcome(string name, int numTimes = 1)
         {
             ViewData["Message"] = _localizer["Greeting"].Value + name;
             ViewData["NumTimes"] = numTimes;
-
             return View();
         }
     }
