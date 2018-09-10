@@ -53,15 +53,6 @@
     </tbody>
 
 </table>
-<<<<<<< aab251897bb52510933d7ec97c92234fa2e94488
-
-<form asp-controller="Movie" asp-action="ListMovies" method="get">
-    <p>
-        Title: <input type="text" name="titleSearchString">
-        <select asp-for="MovieGenre" asp-items="Model.Genres" name="genreSearchString">
-            <option value="">All</option>
-        </select>
-=======
     <form asp-action="ListMovies" asp-controller="Movie" method="GET">
         <p>
             Title: <input type="text" name  ="titleSearchString">
@@ -72,7 +63,6 @@
         <p>
             Sort by: <input type="text" name ="sortOrder">
         </p>
->>>>>>> movies can now be sorted
         <input type="submit" value="Filter" />
     </p>
 </form>
