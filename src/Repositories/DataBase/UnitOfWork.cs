@@ -6,9 +6,9 @@ namespace TrainingNet.Repositories.Database
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DbContext _context;
+        private readonly DataBaseContext _context;
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(DataBaseContext context)
         {
             _context = context;
             Movies = new MovieRepository(_context);
