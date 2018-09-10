@@ -1,9 +1,16 @@
 using System;
+using TrainingNet.Models.Views;
 
 namespace TrainingNet.Models.DataBase
 {
     public class Movie
     {
+        public void Update(MovieViewModel movieViewModel){
+            Title = movieViewModel.Title;
+            ReleaseDate = movieViewModel.ReleaseDate;
+            Genre = movieViewModel.Genre;
+            Price = movieViewModel.Price;
+        }
         public int ID { get; set; }
         public string Title { get; set; }
         public DateTime ReleaseDate { get; set; }
