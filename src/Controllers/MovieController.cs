@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -62,7 +63,7 @@ namespace TrainingNet.Controllers
                 movieToBeChanged.Update(movie);
                 UnitOfWork.MovieRepository.Update(movieToBeChanged);
                 UnitOfWork.Complete();
-                return RedirectToAction("EditMovie");
+                return RedirectToAction("ListMovies");
             }
             catch(NullReferenceException)
             {
@@ -70,6 +71,11 @@ namespace TrainingNet.Controllers
             }
         }
 
+        [HttpGet("ListMovies")]
+        public IActionResult ListMovies(){
+            IEnumerable movieList = UnitOfWork.Movies.GetAll();
+            return View(movieList);
+        }
         private IUnitOfWork UnitOfWork
         {
            get { return this._unitOfWork; }
