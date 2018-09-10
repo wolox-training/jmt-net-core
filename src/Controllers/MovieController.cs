@@ -34,7 +34,7 @@ namespace TrainingNet.Controllers
         {
             UnitOfWork.MovieRepository.Add(movie);
             UnitOfWork.Complete();
-            return View();
+            return RedirectToAction("ListMovies");
         }
 
         [HttpGet("EditMovie/{id?}")]
