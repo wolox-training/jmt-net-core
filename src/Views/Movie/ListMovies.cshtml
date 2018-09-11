@@ -2,6 +2,7 @@
 @model System.Collections.Generic.IEnumerable<MovieViewModel>
 
 <table class="table">
+
     <thead>
         <tr>
                 <th>
@@ -42,4 +43,11 @@
         </tr>
 }
     </tbody>
+
 </table>
+    <form asp-action="ListMovies" asp-controller="Movie" method="GET">
+        <p>
+            Title: <input type="text" name  ="searchString">
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
