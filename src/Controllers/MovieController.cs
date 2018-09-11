@@ -117,10 +117,13 @@ namespace TrainingNet.Controllers
         }
 
         [HttpGet("")]
-        [HttpGet("ListMovies")]
-        public IActionResult ListMovies()
-        {
-            var movieList = UnitOfWork.MovieRepository.GetAll().Select(movie => new MovieViewModel(movie));
+        [HttpGet("ListMovies/{searchString?}")]
+        public IActionResult ListMovies(string searchString){
+            IEnumerable movieList;
+            if(String.IsNullOrEmpty(searchString))
+                movieList = UnitOfWork.Movies.GetAll();
+            else
+                movieList = UnitOfWork.Movies.Find(s => s.Title.Contains(searchString));
             return View(movieList);
         }
 
