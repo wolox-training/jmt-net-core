@@ -18,7 +18,11 @@ using TrainingNet.Repositories.Interfaces;
 
 namespace TrainingNet.Controllers
 {
+<<<<<<< 9fcafee0e6ed0f111e2e805be0ce1cb352332fa7
     [Authorize]
+=======
+    
+>>>>>>> added user functionality
     [Route("[controller]")]
     public class MovieController : Controller
     {
