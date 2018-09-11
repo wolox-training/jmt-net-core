@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+<<<<<<< e7ecc348cdd47acf25f15c2b530b0b58eaa6ba56
 using System.Net;
 using System.Net.Mail;
+=======
+>>>>>>> added user functionality
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
@@ -25,13 +28,19 @@ namespace TrainingNet.Controllers
         {
             this._unitOfWork = unitOfWork;
         }
+<<<<<<< e7ecc348cdd47acf25f15c2b530b0b58eaa6ba56
 
+=======
+        
+        [Authorize]
+>>>>>>> added user functionality
         [HttpGet("Add")]
         public IActionResult Add()
         {
             return View(new MovieViewModel());
         }
 
+        [Authorize]
         [HttpPost("Add")]
         public IActionResult Add(MovieViewModel movieViewModel)
         {
