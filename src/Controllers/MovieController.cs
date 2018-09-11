@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+<<<<<<< 933bd06a56ab4ee6a42603fff069d697a7e9c747
 using System.Net;
 using System.Net.Mail;
+=======
+>>>>>>> added user functionality
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
@@ -16,7 +19,7 @@ using TrainingNet.Repositories.Interfaces;
 
 namespace TrainingNet.Controllers
 {
-
+    
     [Route("[controller]")]
     public class MovieController : Controller
     {
