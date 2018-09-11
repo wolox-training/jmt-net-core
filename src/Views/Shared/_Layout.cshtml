@@ -26,11 +26,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Movie" asp-action="ListMovies" class="navbar-brand">Movies</a>
+                <a asp-area="" asp-controller="Movies" asp-action="" class="navbar-brand">Movies</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Movie" asp-action="Add">add</a></li>
+                    <li><a asp-area="" asp-controller="Movie" asp-action="AddMovie">add movie</a></li>
+                    <li><a asp-area="" asp-controller="Movie" asp-action="ListMovies">movie list</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Login">log in</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Register">register</a></li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="Logout">log out</a></li>
                 </ul>
             </div>
         </div>

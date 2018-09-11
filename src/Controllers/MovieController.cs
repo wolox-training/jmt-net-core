@@ -16,7 +16,7 @@ using TrainingNet.Repositories.Interfaces;
 
 namespace TrainingNet.Controllers
 {
-
+    
     [Route("[controller]")]
     public class MovieController : Controller
     {
