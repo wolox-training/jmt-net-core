@@ -116,6 +116,14 @@ namespace TrainingNet.Controllers
             }
         }
 
+        [HttpGet("")]
+        [HttpGet("ListMovies")]
+        public IActionResult ListMovies()
+        {
+            var movieList = UnitOfWork.MovieRepository.GetAll().Select(movie => new MovieViewModel(movie));
+            return View(movieList);
+        }
+
         private IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
