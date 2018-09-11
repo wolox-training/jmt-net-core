@@ -58,11 +58,17 @@ namespace TrainingNet.Controllers
         }
 
         [HttpPost("EditMovie/{id}")]
+<<<<<<< 18350f78f9ab7913445fb8ce2f228f0972536045
         public IActionResult EditMovie(MovieViewModel movie, int id)
         {
             try
             {
                 if (id == 0)
+=======
+        public IActionResult EditMovie(MovieViewModel movie, int id){
+            try{
+                if(id == 0)
+>>>>>>> added delete movie functionality
                     throw new NullReferenceException("The movie was not found");
                 Movie movieToBeChanged = UnitOfWork.MovieRepository.Get(id);
                 movieToBeChanged.Update(movie);
@@ -108,10 +114,28 @@ namespace TrainingNet.Controllers
             }
         }
 
+        [HttpGet("")]
         [HttpGet("ListMovies")]
         public IActionResult ListMovies(){
             IEnumerable movieList = UnitOfWork.Movies.GetAll();
             return View(movieList);
+        }
+
+        [HttpGet("DeleteMovie/{id}")]
+        public IActionResult DeleteMovie(int id){
+            //el try catch está por las dudas porque no sé lo que pasa cuando trato
+            //de eliminar/gettear una película que no existe. Recordar preguntarlo.
+            try{
+                if(id == 0)
+                    throw new NullReferenceException("The movie was not found");
+                Movie movie = UnitOfWork.Movies.Get(id);
+                UnitOfWork.Movies.Remove(movie);
+                UnitOfWork.Complete();
+                return RedirectToAction("ListMovies");
+            }
+            catch(NullReferenceException n){
+                return NotFound();
+            }
         }
         private IUnitOfWork UnitOfWork
         {
