@@ -13,7 +13,7 @@ namespace TrainingNet.Controllers
         {
             this._localizer = localizer;
         }
-        
+
         [HttpGet("")]
         [HttpGet("Index")]
         public IActionResult Index()
