@@ -8,15 +8,19 @@ namespace TrainingNet.Controllers
     public class HelloWorldController : Controller
     {
         private readonly IHtmlLocalizer<HomeController> _localizer;
-        public HelloWorldController(IHtmlLocalizer<HomeController> localizer){
+
+        public HelloWorldController(IHtmlLocalizer<HomeController> localizer)
+        {
             this._localizer = localizer;
         }
+
         [HttpGet("")]
         [HttpGet("Index")]
         public IActionResult Index()
         {
             return View();
         }
+
         [HttpGet("Welcome/{id?}")]
         public IActionResult Welcome(string name, int numTimes = 1)
         {

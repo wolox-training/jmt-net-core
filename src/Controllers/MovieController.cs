@@ -13,26 +13,28 @@ namespace TrainingNet.Controllers
     {
         private readonly IHtmlLocalizer<HomeController> _localizer;
         private readonly IUnitOfWork _unitOfWork;
+
         public MovieController(IHtmlLocalizer<HomeController> localizer, IUnitOfWork unitOfWork){
             this._localizer = localizer;
             this._unitOfWork = unitOfWork;
         }
-        [HttpGet("")]
-        [HttpGet("Index")]
-        public IActionResult AddMovie()
+
+        [HttpGet("Add")]
+        public IActionResult Add()
         {
             return View();
         }
-        [HttpPost("")]
-        [HttpPost("Index")]
-        public IActionResult AddMovie(Movie movie){
+
+        [HttpPost("Add")]
+        public IActionResult Add(Movie movie){
             UnitOfWork.Movies.Add(movie);
             UnitOfWork.Complete();
             return RedirectToAction("Index");
         }
+
         private IUnitOfWork UnitOfWork
-       {
+        {
            get { return this._unitOfWork; }
-       }
+        }
     }
 }
