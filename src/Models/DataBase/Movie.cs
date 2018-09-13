@@ -7,15 +7,16 @@ namespace TrainingNet.Models.DataBase
     public class Movie
     {
 
-        public Movie(){ }   
-        public Movie(MovieViewModel movieViewModel){
+        public Movie() { }
+        public Movie(MovieViewModel movieViewModel)
+        {
             Id = movieViewModel.Id;
             Title = movieViewModel.Title;
             ReleaseDate = movieViewModel.ReleaseDate;
             Genre = movieViewModel.Genre;
             Price = movieViewModel.Price;
         }
-        
+
         public void Update(MovieViewModel movieViewModel)
         {
             Title = movieViewModel.Title;
@@ -23,9 +24,10 @@ namespace TrainingNet.Models.DataBase
             Genre = movieViewModel.Genre;
             Price = movieViewModel.Price;
         }
-        
-        public override string ToString(){
-            return    "Title: " + Title + '\n'
+
+        public override string ToString()
+        {
+            return "Title: " + Title + '\n'
                     + "Price: " + Price.ToString() + '\n'
                     + "Release Date: " + ReleaseDate.ToString() + '\n'
                     + "Genre: " + Genre + '\n'
