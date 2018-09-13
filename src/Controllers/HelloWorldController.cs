@@ -8,7 +8,11 @@ namespace TrainingNet.Controllers
     public class HelloWorldController : Controller
     {
         private readonly IHtmlLocalizer<HomeController> _localizer;
+<<<<<<< f2b2082a89ceb8ede60083ff0d05aca34bca99c6
         
+=======
+
+>>>>>>> fixed PR requests, changed name from AddMovie to Add
         public HelloWorldController(IHtmlLocalizer<HomeController> localizer)
         {
             this._localizer = localizer;
@@ -20,7 +24,11 @@ namespace TrainingNet.Controllers
         {
             return View();
         }
+<<<<<<< f2b2082a89ceb8ede60083ff0d05aca34bca99c6
         
+=======
+
+>>>>>>> fixed PR requests, changed name from AddMovie to Add
         [HttpGet("Welcome/{id?}")]
         public IActionResult Welcome(string name, int numTimes = 1)
         {
