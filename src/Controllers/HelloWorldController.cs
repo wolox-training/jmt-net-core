@@ -8,6 +8,7 @@ namespace TrainingNet.Controllers
     public class HelloWorldController : Controller
     {
         private readonly IHtmlLocalizer<HomeController> _localizer;
+        
         public HelloWorldController(IHtmlLocalizer<HomeController> localizer)
         {
             this._localizer = localizer;
