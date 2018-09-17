@@ -20,7 +20,11 @@ namespace TrainingNet.Controllers
         public MovieController(IUnitOfWork unitOfWork){
             this._unitOfWork = unitOfWork;
         }
+<<<<<<< efd9dfb91ace67bce92d21f1c547acbdfaf2d691
 
+=======
+        
+>>>>>>> fixed unresolved conflicts and other PR requested changes
         [HttpGet("Add")]
         public IActionResult Add()
         {
@@ -29,11 +33,15 @@ namespace TrainingNet.Controllers
 
         [HttpPost("Add")]
         public IActionResult Add(Movie movie){
+<<<<<<< efd9dfb91ace67bce92d21f1c547acbdfaf2d691
             UnitOfWork.MovieRepository.Add(movie);
+=======
+>>>>>>> fixed unresolved conflicts and other PR requested changes
             UnitOfWork.Movies.Add(movie);
             UnitOfWork.Complete();
             return RedirectToAction("AddMovie");
         }
+        
         [HttpGet("EditMovie/{id?}")]
         public IActionResult EditMovie(int id)
         {
@@ -48,6 +56,7 @@ namespace TrainingNet.Controllers
                 return NotFound();
             }
         }
+
         [HttpPost("EditMovie/{id?}")]
         public IActionResult EditMovie(MovieViewModel movie, int id){
             try{
