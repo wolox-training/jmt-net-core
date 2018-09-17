@@ -35,6 +35,14 @@ namespace TrainingNet.Models.DataBase
                     + "Genre: " + Genre + '\n'
                     + "Rating: " + Rating.ToString() + '\n';
         }
+        
+        public override string ToString(){
+            return    "Title: " + Title + '\n'
+                    + "Price: " + Price.ToString() + '\n'
+                    + "Release Date: " + ReleaseDate.ToString() + '\n'
+                    + "Genre: " + Genre + '\n'
+                    + "Rating: " + Rating.ToString() + '\n';
+        }
 
         public int Id { get; set; }
         public string Title { get; set; }
