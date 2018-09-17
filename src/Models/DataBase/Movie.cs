@@ -12,7 +12,7 @@ namespace TrainingNet.Models.DataBase
             Genre = movieViewModel.Genre;
             Price = movieViewModel.Price;
         }
-
+        
         public int ID { get; set; }
         public string Title { get; set; }
         [Display(Name = "Release Date")]
