@@ -22,6 +22,11 @@ namespace TrainingNet.Controllers
     [Route("[controller]")]
     public class MovieController : Controller
     {
+<<<<<<< 9e3fc799540e8e76dcdeb0d5ff01a24f18b3ec8b
+=======
+        private string ServerAddress = "februaryRevolution1917@gmail.com";
+        private String ServerPassWord = "toTheGulag";
+>>>>>>> The user can now decide to get an email sent to them
         private readonly IHtmlLocalizer<HomeController> _localizer;
         private readonly IUnitOfWork _unitOfWork;
 
