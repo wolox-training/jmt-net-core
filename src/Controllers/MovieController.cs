@@ -11,7 +11,6 @@ namespace TrainingNet.Controllers
     [Route("[controller]")]
     public class MovieController : Controller
     {
-        private readonly IHtmlLocalizer<HomeController> _localizer;
         private readonly IUnitOfWork _unitOfWork;
         
         public MovieController(IHtmlLocalizer<HomeController> localizer, IUnitOfWork unitOfWork){
@@ -27,7 +26,7 @@ namespace TrainingNet.Controllers
 
         [HttpPost("Add")]
         public IActionResult Add(Movie movie){
-            UnitOfWork.Movies.Add(movie);
+            UnitOfWork.MovieRepository.Add(movie);
             UnitOfWork.Complete();
             return RedirectToAction("Index");
         }
