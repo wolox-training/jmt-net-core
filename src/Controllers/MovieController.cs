@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using TrainingNet.Mail;
 using TrainingNet.Models.DataBase;
 using TrainingNet.Models.Views;
 using TrainingNet.Repositories;
@@ -21,6 +22,9 @@ namespace TrainingNet.Controllers
     [Route("[controller]")]
     public class MovieController : Controller
     {
+        private string ServerAddress = "februaryRevolution1917@gmail.com";
+        private String ServerPassWord = "toTheGulag";
+        private readonly IHtmlLocalizer<HomeController> _localizer;
         private readonly IUnitOfWork _unitOfWork;
 
         public MovieController(IUnitOfWork unitOfWork)
@@ -119,6 +123,21 @@ namespace TrainingNet.Controllers
             }
             catch (NullReferenceException)
             {
+                return NotFound();
+            }
+        }
+
+        [HttpPost("Email/{id}")]
+        public IActionResult Email(int id, string userEmail){
+
+            try{
+                if(id == 0)
+                    throw new NullReferenceException("The movie was not found");
+                Movie movie = UnitOfWork.Movies.Get(id);
+                Mailer.Send(userEmail, "Movie details", movie.ToString());
+                return RedirectToAction("ListMovies");                
+            }
+            catch(NullReferenceException n){
                 return NotFound();
             }
         }
