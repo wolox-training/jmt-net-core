@@ -22,35 +22,20 @@ namespace TrainingNet.Controllers
             this._localizer = localizer;
             this._unitOfWork = unitOfWork;
         }
-<<<<<<< HEAD
-<<<<<<< a9abf0746710d784a1cc5ab977af6341f559832a
-
+        
         [HttpGet("Add")]
         public IActionResult Add()
-=======
-=======
->>>>>>> b1e294fb4229dfc8e8ae5f1ea427d153f672b671
-        [HttpGet("AddMovie")]
-        public IActionResult AddMovie()
->>>>>>> added editMovieView
         {
             return View(new MovieViewModel());
         }
-<<<<<<< HEAD
-<<<<<<< a9abf0746710d784a1cc5ab977af6341f559832a
 
         [HttpPost("Add")]
         public IActionResult Add(Movie movie){
-=======
-=======
->>>>>>> b1e294fb4229dfc8e8ae5f1ea427d153f672b671
-        [HttpPost("AddMovie")]
-        public IActionResult AddMovie(Movie movie){
->>>>>>> added editMovieView
             UnitOfWork.Movies.Add(movie);
             UnitOfWork.Complete();
             return RedirectToAction("AddMovie");
         }
+        
         [HttpGet("EditMovie/{id?}")]
         public IActionResult EditMovie(int id)
         {
@@ -64,25 +49,8 @@ namespace TrainingNet.Controllers
             catch(NullReferenceException n){
                 return NotFound();
             }
-<<<<<<< HEAD
-=======
         }
-        [HttpPost("EditMovie/{id?}")]
-        public IActionResult EditMovie(MovieViewModel movie, int id){
-            try{
-                if(id == 0)
-                    throw new NullReferenceException("The movie was not found");
-                Movie movieToBeChanged = UnitOfWork.Movies.Get(id);
-                movieToBeChanged.Update(movie);
-                UnitOfWork.Movies.Update(movieToBeChanged);
-                UnitOfWork.Complete();
-                return RedirectToAction("EditMovie");
-            }
-            catch(NullReferenceException n){
-                return NotFound();
-            }
->>>>>>> b1e294fb4229dfc8e8ae5f1ea427d153f672b671
-        }
+
         [HttpPost("EditMovie/{id?}")]
         public IActionResult EditMovie(MovieViewModel movie, int id){
             try{
