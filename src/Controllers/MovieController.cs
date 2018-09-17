@@ -73,7 +73,7 @@ namespace TrainingNet.Controllers
 
         [HttpGet("ListMovies")]
         public IActionResult ListMovies(){
-            IEnumerable movieList = UnitOfWork.Movies.GetAll();
+            IEnumerable movieList = UnitOfWork.MovieRepository.GetAll();
             return View(movieList);
         }
         private IUnitOfWork UnitOfWork
