@@ -36,24 +36,37 @@ namespace TrainingNet.Controllers
             UnitOfWork.Complete();
             return RedirectToAction("AddMovie");
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> d8b5ed90a8df37bb6ddda45cf66204ea1f79a223
         [HttpGet("EditMovie/{id?}")]
         public IActionResult EditMovie(int id)
         {
             try{
                 if(id == 0)
                     throw new NullReferenceException("The movie was not found");
+<<<<<<< HEAD
                 Movie movie = UnitOfWork.MovieRepository.Get(id);
                 var movieViewModel = new MovieViewModel(movie);
                 return View(movieViewModel);
             }
             catch(NullReferenceException)
             {
+=======
+                Movie movie = UnitOfWork.Movies.Get(id);
+                var movieViewModel = new MovieViewModel(movie);
+                return View(movieViewModel);
+            }
+            catch(NullReferenceException n){
+>>>>>>> d8b5ed90a8df37bb6ddda45cf66204ea1f79a223
                 return NotFound();
             }
         }
 
         [HttpPost("EditMovie/{id?}")]
+<<<<<<< HEAD
         public IActionResult EditMovie(MovieViewModel movie, int id)
         {
             try{
@@ -67,6 +80,19 @@ namespace TrainingNet.Controllers
             }
             catch(NullReferenceException)
             {
+=======
+        public IActionResult EditMovie(MovieViewModel movie, int id){
+            try{
+                if(id == 0)
+                    throw new NullReferenceException("The movie was not found");
+                Movie movieToBeChanged = UnitOfWork.Movies.Get(id);
+                movieToBeChanged.Update(movie);
+                UnitOfWork.Movies.Update(movieToBeChanged);
+                UnitOfWork.Complete();
+                return RedirectToAction("EditMovie");
+            }
+            catch(NullReferenceException n){
+>>>>>>> d8b5ed90a8df37bb6ddda45cf66204ea1f79a223
                 return NotFound();
             }
         }
