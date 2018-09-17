@@ -42,27 +42,30 @@ namespace TrainingNet.Controllers
             try{
                 if(id == 0)
                     throw new NullReferenceException("The movie was not found");
-                Movie movie = UnitOfWork.Movies.Get(id);
+                Movie movie = UnitOfWork.MovieRepository.Get(id);
                 var movieViewModel = new MovieViewModel(movie);
                 return View(movieViewModel);
             }
-            catch(NullReferenceException n){
+            catch(NullReferenceException)
+            {
                 return NotFound();
             }
         }
         
         [HttpPost("EditMovie/{id?}")]
-        public IActionResult EditMovie(MovieViewModel movie, int id){
+        public IActionResult EditMovie(MovieViewModel movie, int id)
+        {
             try{
                 if(id == 0)
                     throw new NullReferenceException("The movie was not found");
-                Movie movieToBeChanged = UnitOfWork.Movies.Get(id);
+                Movie movieToBeChanged = UnitOfWork.MovieRepository.Get(id);
                 movieToBeChanged.Update(movie);
-                UnitOfWork.Movies.Update(movieToBeChanged);
+                UnitOfWork.MovieRepository.Update(movieToBeChanged);
                 UnitOfWork.Complete();
                 return RedirectToAction("EditMovie");
             }
-            catch(NullReferenceException n){
+            catch(NullReferenceException)
+            {
                 return NotFound();
             }
         }
