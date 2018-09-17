@@ -24,9 +24,14 @@ namespace TrainingNet.Controllers
         [HttpGet("Welcome/{id?}")]
         public IActionResult Welcome(string name, int numTimes = 1)
         {
-            ViewData["Message"] = _localizer["Greeting"].Value + name;
+            ViewData["Message"] = Localizer["Greeting"].Value + name;
             ViewData["NumTimes"] = numTimes;
             return View();
+        }
+
+        private IHtmlLocalizer Localizer
+        {
+            get { return this._localizer; }
         }
     }
 }

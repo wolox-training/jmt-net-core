@@ -11,10 +11,10 @@ namespace TrainingNet.Repositories.Database
         public UnitOfWork(DataBaseContext context)
         {
             _context = context;
-            Movies = new MovieRepository(_context);
+            MovieRepository = new MovieRepository(_context);
         }
 
-        public IRepository<Movie> Movies { get; private set; }
+        public IRepository<Movie> MovieRepository { get; private set; }
 
         public int Complete()
         {

@@ -10,8 +10,6 @@ namespace TrainingNet.Repositories
 
     public class MovieRepository : Repository<Movie>
     {
-        public MovieRepository(DataBaseContext context) : base(context)
-        {
-        }
+        public MovieRepository(DataBaseContext context) : base(context) {}
     }
 }
