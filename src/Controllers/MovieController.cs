@@ -34,7 +34,7 @@ namespace TrainingNet.Controllers
             UnitOfWork.Complete();
             return View();
         }
-        
+
         [HttpGet("EditMovie/{id?}")]
         public IActionResult EditMovie(int id)
         {
