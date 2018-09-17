@@ -21,7 +21,6 @@ namespace TrainingNet.Controllers
         {
             this._unitOfWork = unitOfWork;
         }
-
         [HttpGet("Add")]
         public IActionResult Add()
         {
@@ -35,7 +34,7 @@ namespace TrainingNet.Controllers
             UnitOfWork.Complete();
             return View();
         }
-
+        
         [HttpGet("EditMovie/{id?}")]
         public IActionResult EditMovie(int id)
         {
@@ -50,6 +49,7 @@ namespace TrainingNet.Controllers
                 return NotFound();
             }
         }
+
         [HttpPost("EditMovie/{id?}")]
         public IActionResult EditMovie(MovieViewModel movie, int id){
             try{
