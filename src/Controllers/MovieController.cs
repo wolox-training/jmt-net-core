@@ -21,6 +21,7 @@ namespace TrainingNet.Controllers
         {
             this._unitOfWork = unitOfWork;
         }
+        
         [HttpGet("Add")]
         public IActionResult Add()
         {
@@ -30,7 +31,6 @@ namespace TrainingNet.Controllers
         [HttpPost("Add")]
         public IActionResult Add(Movie movie)
         {
-            UnitOfWork.MovieRepository.Add(movie);
             UnitOfWork.Movies.Add(movie);
             UnitOfWork.Complete();
             return View();
