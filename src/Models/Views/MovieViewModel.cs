@@ -5,13 +5,7 @@ namespace TrainingNet.Models.Views
 {
     public class MovieViewModel
     {
-<<<<<<< HEAD
         public MovieViewModel(){ }
-=======
-        public MovieViewModel(){
-            
-        }
->>>>>>> d8b5ed90a8df37bb6ddda45cf66204ea1f79a223
         public MovieViewModel(Movie movie){
             ID = movie.ID;
             Price = movie.Price;
