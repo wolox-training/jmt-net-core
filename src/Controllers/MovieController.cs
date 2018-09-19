@@ -118,12 +118,12 @@ namespace TrainingNet.Controllers
 
         [HttpGet("")]
         [HttpGet("ListMovies/{searchString?}")]
-        public IActionResult ListMovies(string searchString){
-            IEnumerable movieList;
-            if(String.IsNullOrEmpty(searchString))
-                movieList = UnitOfWork.Movies.GetAll();
-            else
-                movieList = UnitOfWork.Movies.Find(s => s.Title.Contains(searchString));
+        public IActionResult ListMovies(string titleSearchString, string genreSearchString){
+            var movieList = UnitOfWork.Movies.GetAll();
+            if(!String.IsNullOrEmpty(titleSearchString))
+                movieList = movieList.Where(s => s.Title.Contains(titleSearchString));
+            if(!String.IsNullOrEmpty(genreSearchString))
+                movieList = movieList.Where(s => s.Title.Contains(genreSearchString));
             return View(movieList);
         }
 
