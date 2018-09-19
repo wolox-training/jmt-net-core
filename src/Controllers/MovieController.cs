@@ -137,8 +137,8 @@ namespace TrainingNet.Controllers
             try{
                 if(id == 0)
                     throw new NullReferenceException("The movie was not found");
-                Movie movie = UnitOfWork.Movies.Get(id);
-                UnitOfWork.Movies.Remove(movie);
+                Movie movie = UnitOfWork.MovieRepository.Get(id);
+                UnitOfWork.MovieRepository.Remove(movie);
                 UnitOfWork.Complete();
                 return RedirectToAction("ListMovies");
             }
