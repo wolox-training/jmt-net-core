@@ -14,7 +14,7 @@ namespace TrainingNet.Models.DataBase
             Price = movieViewModel.Price;
         }
         
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
