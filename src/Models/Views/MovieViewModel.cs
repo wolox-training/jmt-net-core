@@ -14,6 +14,7 @@ namespace TrainingNet.Models.Views
             ReleaseDate = movie.ReleaseDate;
             Genre = movie.Genre;
             Title = movie.Title;
+            Rating = movie.Rating;
         }
         
         public int Id { get; set; }
@@ -21,5 +22,6 @@ namespace TrainingNet.Models.Views
         public DateTime ReleaseDate { get; set; }
         public string Genre { get; set; }
         public decimal Price { get; set; }
+        public decimal Rating { get; set; }
     }
 }
