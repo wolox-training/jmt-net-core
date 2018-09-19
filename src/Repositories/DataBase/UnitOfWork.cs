@@ -6,15 +6,15 @@ namespace TrainingNet.Repositories.Database
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DbContext _context;
+        private readonly DataBaseContext _context;
 
-        public UnitOfWork(DbContext context)
+        public UnitOfWork(DataBaseContext context)
         {
             _context = context;
-            Movies = new MovieRepository(_context);
+            MovieRepository = new MovieRepository(_context);
         }
 
-        public IRepository<Movie> Movies { get; private set; }
+        public IRepository<Movie> MovieRepository { get; private set; }
 
         public int Complete()
         {

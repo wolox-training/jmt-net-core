@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using TrainingNet.Repositories.Database;
 using TrainingNet.Repositories.Interfaces;
 
 namespace TrainingNet.Repositories
@@ -11,9 +12,9 @@ namespace TrainingNet.Repositories
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         
-        protected readonly DbContext Context;
+        protected readonly DataBaseContext Context;
 
-        public Repository(DbContext context){
+        public Repository(DataBaseContext context){
             Context = context;
         }
 

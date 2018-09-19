@@ -8,6 +8,7 @@ namespace TrainingNet.Controllers
     public class HelloWorldController : Controller
     {
         private readonly IHtmlLocalizer<HomeController> _localizer;
+        
         public HelloWorldController(IHtmlLocalizer<HomeController> localizer)
         {
             this._localizer = localizer;
@@ -19,13 +20,18 @@ namespace TrainingNet.Controllers
         {
             return View();
         }
-
+        
         [HttpGet("Welcome/{id?}")]
         public IActionResult Welcome(string name, int numTimes = 1)
         {
-            ViewData["Message"] = _localizer["Greeting"].Value + name;
+            ViewData["Message"] = Localizer["Greeting"].Value + name;
             ViewData["NumTimes"] = numTimes;
             return View();
+        }
+
+        private IHtmlLocalizer Localizer
+        {
+            get { return this._localizer; }
         }
     }
 }
