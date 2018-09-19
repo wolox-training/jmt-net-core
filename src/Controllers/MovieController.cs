@@ -67,7 +67,7 @@ namespace TrainingNet.Controllers
             }
         }
 
-        [HttpPost("EditMovie/{id}")]        
+        [HttpPost("EditMovie/{id}")]
         public IActionResult EditMovie(MovieViewModel movie, int id)
         {
             try
@@ -128,16 +128,19 @@ namespace TrainingNet.Controllers
         }
 
         [HttpPost("Email/{id}")]
-        public IActionResult Email(int id, string userEmail){
+        public IActionResult Email(int id, string userEmail)
+        {
 
-            try{
-                if(id == 0)
+            try
+            {
+                if (id == 0)
                     throw new NullReferenceException("The movie was not found");
-                Movie movie = UnitOfWork.Movies.Get(id);
+                Movie movie = UnitOfWork.MovieRepository.Get(id);
                 Mailer.Send(userEmail, "Movie details", movie.ToString());
-                return RedirectToAction("ListMovies");                
+                return RedirectToAction("ListMovies");
             }
-            catch(NullReferenceException n){
+            catch (NullReferenceException n)
+            {
                 return NotFound();
             }
         }
