@@ -30,7 +30,6 @@ namespace TrainingNet.Controllers
 
         [HttpPost("Add")]
         public IActionResult Add(Movie movie)
-        
         {
             UnitOfWork.MovieRepository.Add(movie);
             UnitOfWork.Complete();
