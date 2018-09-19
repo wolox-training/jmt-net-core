@@ -6,7 +6,8 @@ namespace TrainingNet.Models.Views
     public class MovieViewModel
     {
         public MovieViewModel(){ }
-        public MovieViewModel(Movie movie){
+        public MovieViewModel(Movie movie)
+        {
             ID = movie.ID;
             Price = movie.Price;
             ReleaseDate = movie.ReleaseDate;

@@ -32,7 +32,7 @@ namespace TrainingNet.Controllers
         public IActionResult Add(Movie movie)
         
         {
-            UnitOfWork.Movies.Add(movie);
+            UnitOfWork.MovieRepository.Add(movie);
             UnitOfWork.Complete();
             return View();
         }
