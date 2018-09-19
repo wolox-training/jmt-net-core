@@ -2,11 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-<<<<<<< 933bd06a56ab4ee6a42603fff069d697a7e9c747
 using System.Net;
 using System.Net.Mail;
-=======
->>>>>>> added user functionality
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
@@ -116,12 +113,12 @@ namespace TrainingNet.Controllers
 
         [HttpGet("")]
         [HttpGet("ListMovies/{searchString?}")]
-        public IActionResult ListMovies(string searchString){
-            IEnumerable movieList;
-            if(String.IsNullOrEmpty(searchString))
-                movieList = UnitOfWork.Movies.GetAll();
-            else
-                movieList = UnitOfWork.Movies.Find(s => s.Title.Contains(searchString));
+        public IActionResult ListMovies(string titleSearchString, string genreSearchString){
+            var movieList = UnitOfWork.Movies.GetAll();
+            if(!String.IsNullOrEmpty(titleSearchString))
+                movieList = movieList.Where(s => s.Title.Contains(titleSearchString));
+            if(!String.IsNullOrEmpty(genreSearchString))
+                movieList = movieList.Where(s => s.Title.Contains(genreSearchString));
             return View(movieList);
         }
 
