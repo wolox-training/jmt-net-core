@@ -1,3 +1,0 @@
-<h2>Add a movie</h2>
-
-@Html.Partial("_ShowMovie")
