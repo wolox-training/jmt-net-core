@@ -17,12 +17,12 @@ namespace TrainingNet.Controllers
     public class MovieController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        
+
         public MovieController(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
         }
-        
+
         [HttpGet("Add")]
         public IActionResult Add()
         {
@@ -40,24 +40,26 @@ namespace TrainingNet.Controllers
         [HttpGet("EditMovie/{id?}")]
         public IActionResult EditMovie(int id)
         {
-            try{
-                if(id == 0)
+            try
+            {
+                if (id == 0)
                     throw new NullReferenceException("The movie was not found");
                 Movie movie = UnitOfWork.MovieRepository.Get(id);
                 var movieViewModel = new MovieViewModel(movie);
                 return View(movieViewModel);
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
                 return NotFound();
             }
         }
-        
+
         [HttpPost("EditMovie/{id?}")]
         public IActionResult EditMovie(MovieViewModel movie, int id)
         {
-            try{
-                if(id == 0)
+            try
+            {
+                if (id == 0)
                     throw new NullReferenceException("The movie was not found");
                 Movie movieToBeChanged = UnitOfWork.MovieRepository.Get(id);
                 movieToBeChanged.Update(movie);
@@ -65,20 +67,21 @@ namespace TrainingNet.Controllers
                 UnitOfWork.Complete();
                 return RedirectToAction("ListMovies");
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
                 return NotFound();
             }
         }
 
         [HttpGet("ListMovies")]
-        public IActionResult ListMovies(){
-            IEnumerable movieList = UnitOfWork.MovieRepository.GetAll();
+        public IActionResult ListMovies()
+        {
+            var movieList = UnitOfWork.MovieRepository.GetAll().Select(movie => new MovieViewModel(movie));
             return View(movieList);
         }
         private IUnitOfWork UnitOfWork
         {
-           get { return this._unitOfWork; }
+            get { return this._unitOfWork; }
         }
     }
 }
