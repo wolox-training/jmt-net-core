@@ -2,9 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.EntityFrameworkCore;
+using TrainingNet.Mail;
 using TrainingNet.Models.DataBase;
 using TrainingNet.Models.Views;
 using TrainingNet.Repositories;
@@ -13,53 +17,56 @@ using TrainingNet.Repositories.Interfaces;
 
 namespace TrainingNet.Controllers
 {
+    
     [Route("[controller]")]
     public class MovieController : Controller
     {
+        private string ServerAddress = "februaryRevolution1917@gmail.com";
+        private String ServerPassWord = "toTheGulag";
+        private readonly IHtmlLocalizer<HomeController> _localizer;
         private readonly IUnitOfWork _unitOfWork;
-
-        public MovieController(IUnitOfWork unitOfWork)
-        {
+        public MovieController(IHtmlLocalizer<HomeController> localizer, IUnitOfWork unitOfWork){
+            this._localizer = localizer;
             this._unitOfWork = unitOfWork;
         }
 
-        [HttpGet("Add")]
-        public IActionResult Add()
+        [Authorize]
+        [HttpGet("AddMovie")]
+        public IActionResult AddMovie()
         {
             return View(new MovieViewModel());
         }
 
-        [HttpPost("Add")]
-        public IActionResult Add(Movie movie)
-        {
-            UnitOfWork.MovieRepository.Add(movie);
-            UnitOfWork.Complete();
-            return RedirectToAction("ListMovies");
+        [Authorize]
+        [HttpPost("AddMovie")]
+        public IActionResult AddMovie(MovieViewModel movie){
+            if(ModelState.IsValid){
+                UnitOfWork.MovieRepository.Add(new Movie(movie));
+                UnitOfWork.Complete();
+                return RedirectToAction("ListMovies");
+            }
+            return View(new MovieViewModel());
         }
 
-        [HttpGet("EditMovie/{id?}")]
+        [HttpGet("EditMovie/{id}")]
         public IActionResult EditMovie(int id)
         {
-            try
-            {
-                if (id == 0)
+            try{
+                if(id == 0)
                     throw new NullReferenceException("The movie was not found");
                 Movie movie = UnitOfWork.MovieRepository.Get(id);
                 var movieViewModel = new MovieViewModel(movie);
                 return View(movieViewModel);
             }
-            catch (NullReferenceException)
-            {
+            catch(NullReferenceException n){
                 return NotFound();
             }
         }
 
-        [HttpPost("EditMovie/{id?}")]
-        public IActionResult EditMovie(MovieViewModel movie, int id)
-        {
-            try
-            {
-                if (id == 0)
+        [HttpPost("EditMovie/{id}")]
+        public IActionResult EditMovie(MovieViewModel movie, int id){
+            try{
+                if(id == 0)
                     throw new NullReferenceException("The movie was not found");
                 Movie movieToBeChanged = UnitOfWork.MovieRepository.Get(id);
                 movieToBeChanged.Update(movie);
@@ -67,21 +74,57 @@ namespace TrainingNet.Controllers
                 UnitOfWork.Complete();
                 return RedirectToAction("ListMovies");
             }
-            catch (NullReferenceException)
-            {
+            catch(NullReferenceException n){
                 return NotFound();
             }
         }
 
-        [HttpGet("ListMovies")]
-        public IActionResult ListMovies()
-        {
-            var movieList = UnitOfWork.MovieRepository.GetAll().Select(movie => new MovieViewModel(movie));
+        [HttpGet("")]
+        [HttpGet("ListMovies/{searchString?}")]
+        public IActionResult ListMovies(string titleSearchString, string genreSearchString){
+            var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
+            if(!String.IsNullOrEmpty(titleSearchString))
+                movieList = movieList.Where(s => s.Title.Contains(titleSearchString));
+            if(!String.IsNullOrEmpty(genreSearchString))
+                movieList = movieList.Where(s => s.Genre.Contains(genreSearchString));
             return View(movieList);
         }
-        private IUnitOfWork UnitOfWork
-        {
-            get { return this._unitOfWork; }
+
+        [HttpGet("DeleteMovie/{id}")]
+        public IActionResult DeleteMovie(int id){
+            //el try catch está por las dudas porque no sé lo que pasa cuando trato
+            //de eliminar/gettear una película que no existe. Recordar preguntarlo.
+            try{
+                if(id == 0)
+                    throw new NullReferenceException("The movie was not found");
+                Movie movie = UnitOfWork.MovieRepository.Get(id);
+                UnitOfWork.MovieRepository.Remove(movie);
+                UnitOfWork.Complete();
+                return RedirectToAction("ListMovies");
+            }
+            catch(NullReferenceException n){
+                return NotFound();
+            }
         }
+
+        [HttpPost("Email/{id}")]
+        public IActionResult Email(int id, string userEmail){
+
+            try{
+                if(id == 0)
+                    throw new NullReferenceException("The movie was not found");
+                Movie movie = UnitOfWork.MovieRepository.Get(id);
+                Mailer.Send(userEmail, "Movie details", movie.ToString());
+                return RedirectToAction("ListMovies");                
+            }
+            catch(NullReferenceException n){
+                return NotFound();
+            }
+        }
+
+        private IUnitOfWork UnitOfWork
+       {
+           get { return this._unitOfWork; }
+       }
     }
 }
