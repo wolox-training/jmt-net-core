@@ -111,33 +111,6 @@ namespace TrainingNet.Controllers
             }
         }
 
-        [HttpGet("")]
-        [HttpGet("ListMovies/{searchString?}")]
-        public IActionResult ListMovies(string titleSearchString, string genreSearchString){
-            var movieList = UnitOfWork.MovieRepository.GetAll();
-            if(!String.IsNullOrEmpty(titleSearchString))
-                movieList = movieList.Where(s => s.Title.Contains(titleSearchString));
-            if(!String.IsNullOrEmpty(genreSearchString))
-                movieList = movieList.Where(s => s.Genre.Contains(genreSearchString));
-            return View(movieList);
-        }
-
-        [HttpGet("DeleteMovie/{id}")]
-        public IActionResult DeleteMovie(int id){
-            //el try catch está por las dudas porque no sé lo que pasa cuando trato
-            //de eliminar/gettear una película que no existe. Recordar preguntarlo.
-            try{
-                if(id == 0)
-                    throw new NullReferenceException("The movie was not found");
-                Movie movie = UnitOfWork.MovieRepository.Get(id);
-                UnitOfWork.MovieRepository.Remove(movie);
-                UnitOfWork.Complete();
-                return RedirectToAction("ListMovies");
-            }
-            catch(NullReferenceException n){
-                return NotFound();
-            }
-        }
         private IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
