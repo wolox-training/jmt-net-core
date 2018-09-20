@@ -37,9 +37,9 @@ namespace TrainingNet.Controllers
         }
 
         [HttpPost("Add")]
-        public IActionResult Add(MovieViewModel movie)
+        public IActionResult Add(MovieViewModel movieViewModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 UnitOfWork.MovieRepository.Add(new Movie(movieViewModel));
                 UnitOfWork.Complete();
@@ -54,7 +54,7 @@ namespace TrainingNet.Controllers
             try
             {
                 Movie movie = UnitOfWork.MovieRepository.Get(id);
-                if(movie == null)
+                if (movie == null)
                     throw new NullReferenceException("The movie was not found");
                 var movieViewModel = new MovieViewModel(movie);
                 return View(movieViewModel);
@@ -154,7 +154,7 @@ namespace TrainingNet.Controllers
             try
             {
                 Movie movie = UnitOfWork.MovieRepository.Get(id);
-                if(movie == null)
+                if (movie == null)
                     throw new NullReferenceException("the movie was not found");
                 Mailer.Send(userEmail, "Movie details", movie.ToString());
                 return RedirectToAction("ListMovies");
