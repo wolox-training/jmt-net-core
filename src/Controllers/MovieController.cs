@@ -20,13 +20,9 @@ namespace TrainingNet.Controllers
     [Route("[controller]")]
     public class MovieController : Controller
     {
-        private string ServerAddress = "februaryRevolution1917@gmail.com";
-        private String ServerPassWord = "toTheGulag";
-        private readonly IHtmlLocalizer<HomeController> _localizer;
         private readonly IUnitOfWork _unitOfWork;
-        public MovieController(IHtmlLocalizer<HomeController> localizer, IUnitOfWork unitOfWork)
+        public MovieController(IUnitOfWork unitOfWork)
         {
-            this._localizer = localizer;
             this._unitOfWork = unitOfWork;
         }
 
@@ -39,7 +35,8 @@ namespace TrainingNet.Controllers
         [HttpPost("Add")]
         public IActionResult Add(MovieViewModel movieViewModel)
         {
-            UnitOfWork.MovieRepository.Add(new Movie(movieViewModel));
+            Movie aux = new Movie(movieViewModel);
+            UnitOfWork.MovieRepository.Add(aux);
             UnitOfWork.Complete();
             return RedirectToAction("ListMovies");
         }
