@@ -35,7 +35,6 @@ namespace TrainingNet.Repositories
 
         public void Add(TEntity entity)
         {
-            int x = 2;
             Context.Set<TEntity>().Add(entity);
         }
 
