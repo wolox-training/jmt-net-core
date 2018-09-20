@@ -89,21 +89,40 @@ namespace TrainingNet.Controllers
             }
         }
 
-        [HttpGet("ListMovies")]
-        public IActionResult ListMovies(string titleSearchString, string genreSearchString)
-        {
+        [HttpGet("")]
+        [HttpGet("ListMovies/{searchString?}")]
+        public IActionResult ListMovies(string titleSearchString, string genreSearchString, string sortOrder){
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
-            if (!String.IsNullOrEmpty(titleSearchString))
-            {
-                titleSearchString = titleSearchString.ToLower();
-                movieList = movieList.Where(s => s.Title.ToLower().Contains(titleSearchString));
+            movieList = getFilteredMovies(titleSearchString, genreSearchString, movieList);
+            movieList = getSortedMovies(sortOrder, movieList);
+            return View(movieList);
+        }
+
+        // Descending order by title is the default, hence why it is returned when the string is null, empty or unknown value.
+        private IEnumerable<MovieViewModel> getSortedMovies(string sortOrder, IEnumerable<MovieViewModel> movieList)
+        {
+            if(String.IsNullOrEmpty(sortOrder))
+                return movieList.OrderBy(s => s.Title);
+            sortOrder = sortOrder.ToLower();
+            switch (sortOrder){
+                case "title":
+                    return movieList.OrderBy(s => s.Title);
+                case "price":
+                    return movieList.OrderByDescending(s => s.Price);
+                case "genre":
+                    return movieList.OrderBy(s => s.Genre);
+                default:
+                    return movieList.OrderBy(s => s.Title);
             }
+        }
+
+        private IEnumerable<MovieViewModel> getFilteredMovies(string titleSearchString, string genreSearchString, IEnumerable<MovieViewModel> movieList)
+        {
+            if(!String.IsNullOrEmpty(titleSearchString))
+                movieList = movieList.Where(s => s.Title.Contains(titleSearchString));
             if (!String.IsNullOrEmpty(genreSearchString))
-                movieList = movieList.Where(s => s.Genre.Equals(genreSearchString));
-            MovieGenreViewModel movieGenreViewModel = new MovieGenreViewModel();
-            movieGenreViewModel.Movies = movieList;
-            movieGenreViewModel.Genres = new SelectList(UnitOfWork.MovieRepository.GetGenres().ToList());
-            return View(movieGenreViewModel);
+                movieList = movieList.Where(s => s.Genre.Contains(genreSearchString));
+            return movieList;
         }
 
         [HttpGet("DeleteMovie/{id}")]
