@@ -6,7 +6,8 @@ namespace TrainingNet.Models.DataBase
 {
     public class Movie
     {
-        
+
+        public Movie(){ }   
         public Movie(MovieViewModel movieViewModel){
             Id = movieViewModel.Id;
             Title = movieViewModel.Title;

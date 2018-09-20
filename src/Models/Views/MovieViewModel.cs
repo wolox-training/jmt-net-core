@@ -6,6 +6,7 @@ namespace TrainingNet.Models.Views
     public class MovieViewModel
     {
         public MovieViewModel(){ }
+        
         public MovieViewModel(Movie movie)
         {
             Id = movie.Id;
