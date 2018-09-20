@@ -91,7 +91,8 @@ namespace TrainingNet.Controllers
 
         [HttpGet("")]
         [HttpGet("ListMovies/{searchString?}")]
-        public IActionResult ListMovies(string titleSearchString, string genreSearchString, string sortOrder){
+        public IActionResult ListMovies(string titleSearchString, string genreSearchString, string sortOrder)
+        {
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
             movieList = getFilteredMovies(titleSearchString, genreSearchString, movieList);
             movieList = getSortedMovies(sortOrder, movieList);
@@ -101,10 +102,11 @@ namespace TrainingNet.Controllers
         // Descending order by title is the default, hence why it is returned when the string is null, empty or unknown value.
         private IEnumerable<MovieViewModel> getSortedMovies(string sortOrder, IEnumerable<MovieViewModel> movieList)
         {
-            if(String.IsNullOrEmpty(sortOrder))
+            if (String.IsNullOrEmpty(sortOrder))
                 return movieList.OrderBy(s => s.Title);
             sortOrder = sortOrder.ToLower();
-            switch (sortOrder){
+            switch (sortOrder)
+            {
                 case "title":
                     return movieList.OrderBy(s => s.Title);
                 case "price":
@@ -118,7 +120,7 @@ namespace TrainingNet.Controllers
 
         private IEnumerable<MovieViewModel> getFilteredMovies(string titleSearchString, string genreSearchString, IEnumerable<MovieViewModel> movieList)
         {
-            if(!String.IsNullOrEmpty(titleSearchString))
+            if (!String.IsNullOrEmpty(titleSearchString))
                 movieList = movieList.Where(s => s.Title.Contains(titleSearchString));
             if (!String.IsNullOrEmpty(genreSearchString))
                 movieList = movieList.Where(s => s.Genre.Contains(genreSearchString));
