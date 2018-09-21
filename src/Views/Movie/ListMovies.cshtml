@@ -1,17 +1,10 @@
 @using TrainingNet.Models.Views
-<<<<<<< 2de8d81344ebcb9a26e1662862bbc14034883df7
 @model MovieGenreViewModel
-=======
-@using TrainingNet.Paging
-@model PaginatedList<MovieViewModel>
->>>>>>> no anda aun, me tira error al entrar en list movies pero no me dice donde
 
 <table class="table">
-
     <thead>
         <tr>
                 <th>
-<<<<<<< 2de8d81344ebcb9a26e1662862bbc14034883df7
                     <a asp-action="ListMovies" asp-route-sortOrder="title" asp-route-descending=@(!(bool)ViewData["descending"])>Title</a>
                 </th>
                 <th>
@@ -25,19 +18,6 @@
                 </th>
                 <th>
                     <a asp-action="ListMovies" asp-route-sortOrder="rating" asp-route-descending=@(!(bool)ViewData["descending"])>Rating</a>
-=======
-                    Title
-                </th>
-                <th>
-                    Release Date
-                </th>
-                <th>
-                    Genre
-                </th>
-                <th>
-                    Price
->>>>>>> no anda aun, me tira error al entrar en list movies pero no me dice donde
-                </th>
             <th></th>
         </tr>
     </thead>
