@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TrainingNet.Models.Views;
 
@@ -44,5 +45,6 @@ namespace TrainingNet.Models.DataBase
         public string Genre { get; set; }
         public decimal Price { get; set; }
         public decimal Rating { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }
