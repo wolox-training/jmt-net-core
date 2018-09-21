@@ -15,6 +15,7 @@ using TrainingNet.Models.Views;
 using TrainingNet.Repositories;
 using TrainingNet.Repositories.Database;
 using TrainingNet.Repositories.Interfaces;
+using TrainingNet.Paging;
 
 namespace TrainingNet.Controllers
 {
@@ -22,6 +23,8 @@ namespace TrainingNet.Controllers
     [Route("[controller]")]
     public class MovieController : Controller
     {
+        private const int DEFAULT_STARTING_PAGE = 0;
+        private const int DEFAULT_PAGE_SIZE = 5;
         private readonly IHtmlLocalizer<HomeController> _localizer;
         private readonly IUnitOfWork _unitOfWork;
 
@@ -91,8 +94,30 @@ namespace TrainingNet.Controllers
 
         [HttpGet("")]
         [HttpGet("ListMovies")]
-        public IActionResult ListMovies(string titleSearchString, string genreSearchString, string sortOrder = "title", bool descending = false)
+        public IActionResult ListMovies(string titleSearchString, string genreSearchString,
+                                        string currentTitleFilter, string currentGenreFilter,
+                                        int page = DEFAULT_STARTING_PAGE, int pageSize = DEFAULT_PAGE_SIZE,
+                                        string sortOrder = "title", bool descending = false)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            if (!String.IsNullOrEmpty(titleSearchString) || !String.IsNullOrEmpty(genreSearchString) || !String.IsNullOrEmpty(sortOrder))
+                page = 1;
+            else if (String.IsNullOrEmpty(titleSearchString) && String.IsNullOrEmpty(genreSearchString))
+            {
+                titleSearchString = currentTitleFilter;
+                genreSearchString = currentGenreFilter;
+            }
+            else if (String.IsNullOrEmpty(genreSearchString))
+                genreSearchString = currentGenreFilter;
+            else
+                titleSearchString = currentTitleFilter;
+            genreSearchString = currentGenreFilter;
+
+
+
+
+
+
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
             movieList = getFilteredMovies(titleSearchString, genreSearchString, movieList);
             movieList = getSortedMovies(sortOrder, movieList, descending);
@@ -139,7 +164,7 @@ namespace TrainingNet.Controllers
             }
         }
 
-        private IEnumerable<MovieViewModel> getFilteredMovies(string titleSearchString, string genreSearchString, IEnumerable<MovieViewModel> movieList)
+        private IQueryable<MovieViewModel> getFilteredMovies(string titleSearchString, string genreSearchString, IQueryable<MovieViewModel> movieList)
         {
             if (!String.IsNullOrEmpty(titleSearchString))
             {
