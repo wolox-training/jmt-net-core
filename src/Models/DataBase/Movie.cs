@@ -6,6 +6,16 @@ namespace TrainingNet.Models.DataBase
 {
     public class Movie
     {
+
+        public Movie(){ }   
+        public Movie(MovieViewModel movieViewModel){
+            Id = movieViewModel.Id;
+            Title = movieViewModel.Title;
+            ReleaseDate = movieViewModel.ReleaseDate;
+            Genre = movieViewModel.Genre;
+            Price = movieViewModel.Price;
+        }
+        
         public void Update(MovieViewModel movieViewModel)
         {
             Title = movieViewModel.Title;
