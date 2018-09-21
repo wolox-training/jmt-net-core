@@ -24,15 +24,6 @@ namespace TrainingNet.Models.DataBase
             Genre = movieViewModel.Genre;
             Price = movieViewModel.Price;
         }
-
-        public override string ToString()
-        {
-            return "Title: " + Title + '\n'
-                    + "Price: " + Price.ToString() + '\n'
-                    + "Release Date: " + ReleaseDate.ToString() + '\n'
-                    + "Genre: " + Genre + '\n'
-                    + "Rating: " + Rating.ToString() + '\n';
-        }
         
         public override string ToString(){
             return    "Title: " + Title + '\n'

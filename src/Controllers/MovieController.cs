@@ -130,8 +130,6 @@ namespace TrainingNet.Controllers
         [HttpGet("DeleteMovie/{id}")]
         public IActionResult DeleteMovie(int id)
         {
-            //el try catch está por las dudas porque no sé lo que pasa cuando trato
-            //de eliminar/gettear una película que no existe. Recordar preguntarlo.
             try
             {
                 if (id == 0)
