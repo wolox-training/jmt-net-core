@@ -163,7 +163,7 @@ namespace TrainingNet.Controllers
             }
         }
 
-        private IEnumerable<MovieViewModel> getFilteredMovies(string titleSearchString, string genreSearchString, IEnumerable<MovieViewModel> movieList)
+        private IQueryable<MovieViewModel> getFilteredMovies(string titleSearchString, string genreSearchString, IQueryable<MovieViewModel> movieList)
         {
             if (!String.IsNullOrEmpty(titleSearchString))
             {
