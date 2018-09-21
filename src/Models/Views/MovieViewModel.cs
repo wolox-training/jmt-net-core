@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TrainingNet.Models.DataBase;
@@ -41,5 +42,6 @@ namespace TrainingNet.Models.Views
         [Range(0,5)]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Rating { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }
