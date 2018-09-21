@@ -1,17 +1,11 @@
 @using TrainingNet.Models.Views
-<<<<<<< f29b757d648da2da8445be3eedc629b8329ffb1f
 @model MovieGenreViewModel
-=======
-@using TrainingNet.Paging
-@model PaginatedList<MovieViewModel>
->>>>>>> no anda aun, me tira error al entrar en list movies pero no me dice donde
 
 <table class="table">
 
     <thead>
         <tr>
                 <th>
-<<<<<<< f29b757d648da2da8445be3eedc629b8329ffb1f
                     <a asp-action="ListMovies" asp-route-sortOrder="title" asp-route-descending=@(!(bool)ViewData["descending"])>Title</a>
                 </th>
                 <th>
@@ -25,18 +19,6 @@
                 </th>
                 <th>
                     <a asp-action="ListMovies" asp-route-sortOrder="rating" asp-route-descending=@(!(bool)ViewData["descending"])>Rating</a>
-=======
-                    Title
-                </th>
-                <th>
-                    Release Date
-                </th>
-                <th>
-                    Genre
-                </th>
-                <th>
-                    Price
->>>>>>> no anda aun, me tira error al entrar en list movies pero no me dice donde
                 </th>
             <th></th>
         </tr>
@@ -69,40 +51,25 @@
     </tbody>
 
 @{
-<<<<<<< f29b757d648da2da8445be3eedc629b8329ffb1f
     var prevDisabled = !Model.Movies.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.Movies.HasNextPage ? "disabled" : "";
-=======
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
->>>>>>> no anda aun, me tira error al entrar en list movies pero no me dice donde
 }
 
 <a asp-action="ListMovies"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
-<<<<<<< f29b757d648da2da8445be3eedc629b8329ffb1f
    asp-route-page="@(Model.Movies.PageIndex - 1)"
    asp-route-currentGenreFilter="@ViewData["CurrentGenreFilter"]"
    asp-route-currentTitleFilter="@ViewData["CurrentTitleFilter"]"
    asp-route-descending ="@ViewData["descending"]"
-=======
-   asp-route-page="@(Model.PageIndex - 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
->>>>>>> no anda aun, me tira error al entrar en list movies pero no me dice donde
    class="btn btn-default @prevDisabled">
     Previous
 </a>
 <a asp-action="ListMovies"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
-<<<<<<< f29b757d648da2da8445be3eedc629b8329ffb1f
    asp-route-page="@(Model.Movies.PageIndex + 1)"
    asp-route-currentGenreFilter="@ViewData["CurrentGenreFilter"]"
    asp-route-currentTitleFilter="@ViewData["CurrentTitleFilter"]"
    asp-route-descending ="@ViewData["descending"]"
-=======
-   asp-route-page="@(Model.PageIndex + 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
->>>>>>> no anda aun, me tira error al entrar en list movies pero no me dice donde
    class="btn btn-default @nextDisabled">
     Next
 </a>
