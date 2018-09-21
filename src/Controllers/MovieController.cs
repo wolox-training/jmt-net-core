@@ -16,6 +16,7 @@ using TrainingNet.Repositories;
 using TrainingNet.Repositories.Database;
 using TrainingNet.Repositories.Interfaces;
 using TrainingNet.Paging;
+using System.Threading.Tasks;
 
 namespace TrainingNet.Controllers
 {
