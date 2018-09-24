@@ -113,6 +113,8 @@ namespace TrainingNet.Controllers
                     return movieList.OrderByDescending(s => s.Price);
                 case "genre":
                     return movieList.OrderBy(s => s.Genre);
+                case "rating":
+                    return movieList.OrderBy(s => s.Rating);
                 default:
                     return movieList.OrderBy(s => s.Title);
             }

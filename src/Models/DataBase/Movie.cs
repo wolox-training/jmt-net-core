@@ -15,6 +15,7 @@ namespace TrainingNet.Models.DataBase
             ReleaseDate = movieViewModel.ReleaseDate;
             Genre = movieViewModel.Genre;
             Price = movieViewModel.Price;
+            Rating = movieViewModel.Rating;
         }
 
         public void Update(MovieViewModel movieViewModel)
@@ -23,6 +24,7 @@ namespace TrainingNet.Models.DataBase
             ReleaseDate = movieViewModel.ReleaseDate;
             Genre = movieViewModel.Genre;
             Price = movieViewModel.Price;
+            Rating = movieViewModel.Rating;
         }
         
         public override string ToString(){
