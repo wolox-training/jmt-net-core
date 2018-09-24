@@ -14,7 +14,6 @@ namespace TrainingNet.Models.DataBase
         }
 
         public int Id { get; set; }
-        public string content { get; set; }
+        public string Content { get; set; }
         public virtual Movie movie { get; set; }
-    }
 }
