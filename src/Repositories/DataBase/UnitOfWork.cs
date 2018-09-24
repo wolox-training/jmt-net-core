@@ -17,6 +17,7 @@ namespace TrainingNet.Repositories.Database
 
         public IMovieRepository MovieRepository { get; }
         public IUserRepository UserRepository { get; }
+        public ICommentRepository CommentRepository { get; }
 
         public int Complete()
         {
