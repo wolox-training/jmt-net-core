@@ -93,6 +93,25 @@ namespace TrainingNet.Controllers
             }
         }
 
+        [HttpPost("AddComment/{id}")]
+        public IActionResult AddComment(int id, string comment)
+        {
+            try
+            {
+                if (id == 0)
+                    throw new NullReferenceException("The movie was not found");
+                Movie movieToBeChanged = UnitOfWork.MovieRepository.GetMovieWithComments(id);
+                movieToBeChanged.Comments.Add(new Comment(movieToBeChanged, comment));
+                UnitOfWork.MovieRepository.Update(movieToBeChanged);
+                UnitOfWork.Complete();
+                return RedirectToAction("ListMovies");
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
+
         [HttpGet("")]
         [HttpGet("ListMovies")]
         public IActionResult ListMovies(string titleSearchString, string genreSearchString,
