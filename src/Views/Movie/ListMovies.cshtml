@@ -19,6 +19,9 @@
                 <th>
                     <a asp-action="ListMovies" asp-route-sortOrder="rating" asp-route-descending=@ViewData["descending"]>Rating</a>
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rating)
+                </th>
             <th></th>
         </tr>
     </thead>
