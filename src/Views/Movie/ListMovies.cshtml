@@ -43,3 +43,13 @@
 }
     </tbody>
 </table>
+
+<form asp-action="ListMovies" asp-controller="Movie" method="GET">
+    <p>
+        Title: <input type="text" name  ="titleSearchString">
+    </p>
+    <p>
+        Genre: <input type="text" name  ="genreSearchString">
+    </p>
+    <input type="submit" value="Filter" />
+</form>
