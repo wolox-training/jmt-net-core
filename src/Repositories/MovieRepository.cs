@@ -15,7 +15,7 @@ namespace TrainingNet.Repositories
     {
         public MovieRepository(DataBaseContext context) : base(context){ }
 
-        public Movie GetMovieComments(int id)
+        public Movie GetMovieWithComments(int id)
         {
             return Context.Movies.Where(m => m.Id == id).Include(m => m.Comments).FirstOrDefault();
         }
