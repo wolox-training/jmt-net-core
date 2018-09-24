@@ -183,7 +183,11 @@ namespace TrainingNet.Migrations
 
                     b.Property<string>("Content");
 
+<<<<<<< c89d3d009d8de24effa7c077efaa9f31f9ff15ca
                     b.Property<int?>("MovieId");
+=======
+                    b.Property<int?>("movieId");
+>>>>>>> fixed comments in database, removed the movieId property
 
                     b.HasKey("Id");
 
