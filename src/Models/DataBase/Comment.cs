@@ -6,7 +6,6 @@ namespace TrainingNet.Models.DataBase
     public class Comment
     {
         public int Id { get; set; }
-        public int movieId { get; set; }
         public string content { get; set; }
         public Movie movie { get; set; }
     }

@@ -183,13 +183,13 @@ namespace TrainingNet.Migrations
 
                     b.Property<string>("content");
 
-                    b.Property<int>("movieId");
+                    b.Property<int?>("movieId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("movieId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("TrainingNet.Models.DataBase.Movie", b =>
@@ -261,8 +261,7 @@ namespace TrainingNet.Migrations
                 {
                     b.HasOne("TrainingNet.Models.DataBase.Movie", "movie")
                         .WithMany("Comments")
-                        .HasForeignKey("movieId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("movieId");
                 });
 #pragma warning restore 612, 618
         }
