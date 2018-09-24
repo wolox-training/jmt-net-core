@@ -22,8 +22,6 @@ namespace TrainingNet.Controllers
     [Route("[controller]")]
     public class MovieController : Controller
     {
-        private string ServerAddress = "februaryRevolution1917@gmail.com";
-        private String ServerPassWord = "toTheGulag";
         private readonly IHtmlLocalizer<HomeController> _localizer;
         private readonly IUnitOfWork _unitOfWork;
 
