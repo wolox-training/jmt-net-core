@@ -14,6 +14,7 @@ namespace TrainingNet.Repositories.Database
 
         public DbSet<Movie> Movies { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Comment> Comments { get; set;}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
