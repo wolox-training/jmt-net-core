@@ -37,8 +37,7 @@ namespace TrainingNet.Controllers
         [HttpPost("Add")]
         public IActionResult Add(MovieViewModel movieViewModel)
         {
-            Movie movie = new Movie(movieViewModel);
-            UnitOfWork.MovieRepository.Add(movie);
+            UnitOfWork.MovieRepository.Add(new Movie(movieViewModel));
             UnitOfWork.Complete();
             return RedirectToAction("ListMovies");
         }
