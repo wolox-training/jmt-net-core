@@ -44,12 +44,12 @@
     </tbody>
 </table>
 
-<form asp-action="ListMovies" asp-controller="Movie" method="GET">
+<form asp-controller="Movie" asp-action="ListMovies" method="get">
     <p>
-        Title: <input type="text" name  ="titleSearchString">
+        Title: <input type="text" name="titleSearchString">
+        <select asp-for="MovieGenre" asp-items="Model.Genres" name="genreSearchString">
+            <option value="">All</option>
+        </select>
+        <input type="submit" value="Filter" />
     </p>
-    <p>
-        @Html.DropDownList("Genre", Model.Genres, "Genre:", new { @class = "form-control" })
-    </p>
-    <input type="submit" value="Filter" />
 </form>
