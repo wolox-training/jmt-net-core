@@ -17,6 +17,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Price)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Rating)
+                </th>
             <th></th>
         </tr>
     </thead>
@@ -45,7 +48,6 @@
     </tbody>
 
 </table>
-<<<<<<< HEAD
 
 <form asp-action="ListMovies" asp-controller="Movie" method="GET">
     <p>
@@ -56,14 +58,3 @@
     </p>
     <input type="submit" value="Filter" />
 </form>
-=======
-    <form asp-action="ListMovies" asp-controller="Movie" method="GET">
-        <p>
-            Title: <input type="text" name  ="titleSearchString">
-        </p>
-        <p>
-            Genre: <input type="text" name  ="genreSearchString">
-        </p>
-        <input type="submit" value="Filter" />
-    </form>
->>>>>>> f457dcce90ef7a8d1e310031e673c72140f5d2bb

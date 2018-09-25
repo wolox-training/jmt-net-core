@@ -38,8 +38,7 @@ namespace TrainingNet.Controllers
         [HttpPost("Add")]
         public IActionResult Add(MovieViewModel movieViewModel)
         {
-            Movie movie = new Movie(movieViewModel);
-            UnitOfWork.MovieRepository.Add(movie);
+            UnitOfWork.MovieRepository.Add(new Movie(movieViewModel));
             UnitOfWork.Complete();
             return RedirectToAction("ListMovies");
         }
@@ -81,7 +80,7 @@ namespace TrainingNet.Controllers
         }
 
         [HttpGet("")]
-        [HttpGet("ListMovies/{titleSearchString?}/{genreSearchString?}")]
+        [HttpGet("ListMovies")]
         public IActionResult ListMovies(string titleSearchString, string genreSearchString)
         {
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
