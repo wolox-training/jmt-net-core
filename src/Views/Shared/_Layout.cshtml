@@ -42,6 +42,11 @@
                         <li><a asp-area="" asp-controller="Account" asp-action="Register">register</a></li>
                     }
                 </ul>
+                <ul class="nav navbar-nav navbar-right color-white">
+                    <li>
+                        @User.Identity.Name
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
