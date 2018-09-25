@@ -7,6 +7,7 @@ using System.Net.Mail;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TrainingNet.Models.DataBase;
 using TrainingNet.Models.Views;
@@ -81,7 +82,7 @@ namespace TrainingNet.Controllers
         }
 
         [HttpGet("")]
-        [HttpGet("ListMovies/{titleSearchString?}/{genreSearchString?}")]
+        [HttpGet("ListMovies")]
         public IActionResult ListMovies(string titleSearchString, string genreSearchString)
         {
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
@@ -89,7 +90,10 @@ namespace TrainingNet.Controllers
                 movieList = movieList.Where(s => s.Title.Contains(titleSearchString));
             if (!String.IsNullOrEmpty(genreSearchString))
                 movieList = movieList.Where(s => s.Genre.Contains(genreSearchString));
-            return View(movieList);
+            MovieGenreViewModel movieGenreViewModel = new MovieGenreViewModel();
+            movieGenreViewModel.Movies = movieList;
+            movieGenreViewModel.Genres = new SelectList(UnitOfWork.MovieRepository.GetGenres().ToList());
+            return View(movieGenreViewModel);
         }
 
         [HttpGet("DeleteMovie/{id}")]

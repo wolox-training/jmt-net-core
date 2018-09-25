@@ -1,26 +1,26 @@
 @using TrainingNet.Models.Views
-@model System.Collections.Generic.IEnumerable<MovieViewModel>
+@model MovieGenreViewModel
 
 <table class="table">
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                    Title
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ReleaseDate)
+                    Release Date
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Genre)
+                    Genre
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Price)
+                    Price
                 </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Movies) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -49,7 +49,7 @@
         Title: <input type="text" name  ="titleSearchString">
     </p>
     <p>
-        Genre: <input type="text" name  ="genreSearchString">
+        @Html.DropDownList("Genre", Model.Genres, "Genre:", new { @class = "form-control" })
     </p>
     <input type="submit" value="Filter" />
 </form>
