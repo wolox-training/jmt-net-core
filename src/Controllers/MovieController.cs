@@ -7,6 +7,7 @@ using System.Net.Mail;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using TrainingNet.Models.DataBase;
 using TrainingNet.Models.Views;
@@ -16,11 +17,12 @@ using TrainingNet.Repositories.Interfaces;
 
 namespace TrainingNet.Controllers
 {
-
+    [Authorize]
     [Route("[controller]")]
     public class MovieController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+
         public MovieController(IUnitOfWork unitOfWork)
         {
             this._unitOfWork = unitOfWork;
@@ -35,7 +37,8 @@ namespace TrainingNet.Controllers
         [HttpPost("Add")]
         public IActionResult Add(MovieViewModel movieViewModel)
         {
-            UnitOfWork.MovieRepository.Add(new Movie(movieViewModel));
+            Movie movie = new Movie(movieViewModel);
+            UnitOfWork.MovieRepository.Add(movie);
             UnitOfWork.Complete();
             return RedirectToAction("ListMovies");
         }
@@ -57,7 +60,7 @@ namespace TrainingNet.Controllers
             }
         }
 
-        [HttpPost("EditMovie/{id}")]
+        [HttpPost("EditMovie/{id}")]        
         public IActionResult EditMovie(MovieViewModel movie, int id)
         {
             try
@@ -76,16 +79,21 @@ namespace TrainingNet.Controllers
             }
         }
 
-        [HttpGet("")]
-        [HttpGet("ListMovies/{searchString?}")]
+        [HttpGet("ListMovies")]
         public IActionResult ListMovies(string titleSearchString, string genreSearchString)
         {
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
             if (!String.IsNullOrEmpty(titleSearchString))
-                movieList = movieList.Where(s => s.Title.Contains(titleSearchString));
+            {
+                titleSearchString = titleSearchString.ToLower();
+                movieList = movieList.Where(s => s.Title.ToLower().Contains(titleSearchString));
+            }
             if (!String.IsNullOrEmpty(genreSearchString))
-                movieList = movieList.Where(s => s.Genre.Contains(genreSearchString));
-            return View(movieList);
+                movieList = movieList.Where(s => s.Genre.Equals(genreSearchString));
+            MovieGenreViewModel movieGenreViewModel = new MovieGenreViewModel();
+            movieGenreViewModel.Movies = movieList;
+            movieGenreViewModel.Genres = new SelectList(UnitOfWork.MovieRepository.GetGenres().ToList());
+            return View(movieGenreViewModel);
         }
 
         [HttpGet("DeleteMovie/{id}")]

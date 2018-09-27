@@ -23,4 +23,12 @@
             <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <a asp-area="" asp-action="DeleteMovie" asp-route-id="@Model.Id" class="btn btn-default">
+                Delete
+            </a>
+        </div>
+    </div>
 }

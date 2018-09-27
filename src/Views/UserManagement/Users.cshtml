@@ -1,0 +1,19 @@
+@using TrainingNet.Models.Views
+@using System.Collections.Generic
+@model IEnumerable<ApplicationUserViewModel>
+<h2>User list</h2>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    username
+                </th>
+        </tr>
+    </thead>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+        </tr>   
+    }
+</table>
