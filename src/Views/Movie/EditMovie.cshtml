@@ -5,13 +5,6 @@
 <h2>Edit movie</h2>
 
 @Html.Partial("_ShowMovie")
-
-<form asp-action="Email" asp-controller="Movie">
-    <p>
-        Send an email about this movie to: <input type="text" name="userEmail">
-        <input type="submit" value="Send" />
-    </p>
-</form>
 <form asp-action="AddComment" asp-controller="Movie">
     <textarea class="form-control" 
             cols="20" 

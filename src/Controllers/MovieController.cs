@@ -93,6 +93,21 @@ namespace TrainingNet.Controllers
             }
         }
 
+        [HttpGet("Details/{id}")]
+        public IActionResult Details(int id){
+            try
+            {
+                if(id == 0)
+                    throw new NullReferenceException("The movie was not found");
+                MovieViewModel movie = new MovieViewModel(UnitOfWork.MovieRepository.GetMovieWithComments(id));
+                return View(movie);
+            }
+            catch(NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
+
         [HttpPost("AddComment/{id}")]
         public IActionResult AddComment(int id, string comment)
         {
