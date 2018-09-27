@@ -2,6 +2,7 @@
 @model MovieGenreViewModel
 
 <table class="table">
+
     <thead>
         <tr>
                 <th>
@@ -15,6 +16,9 @@
                 </th>
                 <th>
                     Price
+                </th>
+                <th>
+                    Rating
                 </th>
             <th></th>
         </tr>
@@ -35,6 +39,9 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
                 <a asp-action="EditMovie" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="DeleteMovie" asp-route-id="@item.Id">Delete</a>
@@ -42,6 +49,7 @@
         </tr>
 }
     </tbody>
+
 </table>
 
 <form asp-controller="Movie" asp-action="ListMovies" method="get">
