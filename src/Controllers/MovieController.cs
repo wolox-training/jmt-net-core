@@ -17,7 +17,7 @@ using TrainingNet.Repositories.Interfaces;
 
 namespace TrainingNet.Controllers
 {
-
+    [Authorize]
     [Route("[controller]")]
     public class MovieController : Controller
     {
@@ -28,14 +28,12 @@ namespace TrainingNet.Controllers
             this._unitOfWork = unitOfWork;
         }
 
-        [Authorize]
         [HttpGet("Add")]
         public IActionResult Add()
         {
             return View(new MovieViewModel());
         }
 
-        [Authorize]
         [HttpPost("Add")]
         public IActionResult Add(MovieViewModel movieViewModel)
         {
