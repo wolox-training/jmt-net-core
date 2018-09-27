@@ -12,6 +12,7 @@ namespace TrainingNet.Repositories.Database
         {
             _context = context;
             MovieRepository = new MovieRepository(_context);
+            UserRepository = new UserRepository(_context);
         }
 
         public IMovieRepository MovieRepository { get; }

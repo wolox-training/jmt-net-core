@@ -1,4 +1,7 @@
+using System;
+using System.Linq;
 using System.Collections;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using TrainingNet.Models.DataBase;
 using TrainingNet.Repositories;
@@ -10,6 +13,11 @@ namespace TrainingNet.Repositories
 
     public class MovieRepository : Repository<Movie>, IMovieRepository
     {
-        public MovieRepository(DataBaseContext context) : base(context) {}
+        public MovieRepository(DataBaseContext context) : base(context) { }
+
+        public IQueryable<String> GetGenres()
+        {
+            return Context.Movies.Select(s => s.Genre).Distinct();
+        }
     }
 }

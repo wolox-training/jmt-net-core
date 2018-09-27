@@ -116,12 +116,11 @@ namespace TrainingNet.Controllers
         }
 
         [HttpGet]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
-            return RedirectToAction("Users", "Account");
+            return RedirectToAction("Index","Home");
         }
 
         [HttpGet]
