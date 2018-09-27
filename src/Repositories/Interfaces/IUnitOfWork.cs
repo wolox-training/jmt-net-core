@@ -6,7 +6,8 @@ namespace TrainingNet.Repositories.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IRepository<Movie> MovieRepository { get; }
+        IMovieRepository MovieRepository { get; }
+        IUserRepository UserRepository { get; }
         int Complete();
     }
 }

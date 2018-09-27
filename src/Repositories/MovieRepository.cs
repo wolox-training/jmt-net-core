@@ -8,7 +8,7 @@ using TrainingNet.Repositories.Interfaces;
 namespace TrainingNet.Repositories
 {
 
-    public class MovieRepository : Repository<Movie>
+    public class MovieRepository : Repository<Movie>, IMovieRepository
     {
         public MovieRepository(DataBaseContext context) : base(context) {}
     }
