@@ -41,9 +41,7 @@ namespace TrainingNet.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
-            // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -70,8 +68,6 @@ namespace TrainingNet.Controllers
                     return View(model);
                 }
             }
-
-            // If we got this far, something failed, redisplay form
             return RedirectToAction("Login");
         }
 
@@ -110,8 +106,6 @@ namespace TrainingNet.Controllers
                 }
                 AddErrors(result);
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
