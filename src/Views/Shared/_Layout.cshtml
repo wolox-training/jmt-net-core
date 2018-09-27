@@ -29,7 +29,8 @@
                 <a asp-area="" asp-controller="Movie" asp-action="ListMovies" class="navbar-brand">Movies</a>
             </div>
             <div class="navbar-collapse collapse">
-                @if(User.Identity.IsAuthenticated)
+                <ul class="nav navbar-nav">
+                    @if(User.Identity.IsAuthenticated)
                     {
                         <li><a asp-area="" asp-controller="Movie" asp-action="Add">add</a></li>
                         <li><a asp-area="" asp-controller="Movie" asp-action="ListMovies">movie list</a></li>
@@ -41,6 +42,7 @@
                         <li><a asp-area="" asp-controller="Account" asp-action="Login">log in</a></li>
                         <li><a asp-area="" asp-controller="Account" asp-action="Register">register</a></li>
                     }
+                </ul>
             </div>
             <ul class="nav navbar-nav navbar-right color-white">	
                 <li>	
