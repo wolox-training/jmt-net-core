@@ -37,9 +37,13 @@ namespace TrainingNet.Controllers
         [HttpPost("Add")]
         public IActionResult Add(MovieViewModel movieViewModel)
         {
-            UnitOfWork.MovieRepository.Add(new Movie(movieViewModel));
-            UnitOfWork.Complete();
-            return RedirectToAction("ListMovies");
+            if(ModelState.IsValid)
+            {
+                UnitOfWork.MovieRepository.Add(new Movie(movieViewModel));
+                UnitOfWork.Complete();
+                return RedirectToAction("ListMovies");
+            }
+            return View(movieViewModel);
         }
 
         [HttpGet("EditMovie/{id}")]
@@ -64,13 +68,17 @@ namespace TrainingNet.Controllers
         {
             try
             {
-                if (id == 0)
-                    throw new NullReferenceException("The movie was not found");
-                Movie movieToBeChanged = UnitOfWork.MovieRepository.Get(id);
-                movieToBeChanged.Update(movie);
-                UnitOfWork.MovieRepository.Update(movieToBeChanged);
-                UnitOfWork.Complete();
-                return RedirectToAction("ListMovies");
+                if(ModelState.IsValid)
+                {
+                    if (id == 0)
+                        throw new NullReferenceException("The movie was not found");
+                    Movie movieToBeChanged = UnitOfWork.MovieRepository.Get(id);
+                    movieToBeChanged.Update(movie);
+                    UnitOfWork.MovieRepository.Update(movieToBeChanged);
+                    UnitOfWork.Complete();
+                    return RedirectToAction("ListMovies");
+                }
+                return View(movie);
             }
             catch (NullReferenceException)
             {

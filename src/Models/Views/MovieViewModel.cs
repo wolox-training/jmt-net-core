@@ -26,7 +26,7 @@ namespace TrainingNet.Models.Views
         public string Title { get; set; }
 
         [Display(Name = "Release Date")]
-        [DataType(DataType.Date)]    
+        [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
 
         [Required]
