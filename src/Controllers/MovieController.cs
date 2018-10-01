@@ -99,7 +99,7 @@ namespace TrainingNet.Controllers
             MovieGenreViewModel movieGenreViewModel = new MovieGenreViewModel();
             movieGenreViewModel.Movies = movieList;
             movieGenreViewModel.Genres = new SelectList(UnitOfWork.MovieRepository.GetGenres().ToList());
-            return View(movieList);
+            return View(movieGenreViewModel);
         }
 
         // Descending order by title is the default, hence why it is returned when the string is null, empty or unknown value.
