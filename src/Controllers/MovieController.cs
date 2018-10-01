@@ -37,7 +37,7 @@ namespace TrainingNet.Controllers
         }
 
         [HttpPost("Add")]
-        public IActionResult Add(MovieViewModel movie)
+        public IActionResult Add(MovieViewModel movieViewModel)
         {
             if(ModelState.IsValid)
             {
