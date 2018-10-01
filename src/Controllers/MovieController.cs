@@ -96,6 +96,9 @@ namespace TrainingNet.Controllers
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
             movieList = getFilteredMovies(titleSearchString, genreSearchString, movieList);
             movieList = getSortedMovies(sortOrder, movieList);
+            MovieGenreViewModel movieGenreViewModel = new MovieGenreViewModel();
+            movieGenreViewModel.Movies = movieList;
+            movieGenreViewModel.Genres = new SelectList(UnitOfWork.MovieRepository.GetGenres().ToList());
             return View(movieList);
         }
 
@@ -123,9 +126,12 @@ namespace TrainingNet.Controllers
         private IEnumerable<MovieViewModel> getFilteredMovies(string titleSearchString, string genreSearchString, IEnumerable<MovieViewModel> movieList)
         {
             if (!String.IsNullOrEmpty(titleSearchString))
-                movieList = movieList.Where(s => s.Title.Contains(titleSearchString));
+            {
+                titleSearchString = titleSearchString.ToLower();
+                movieList = movieList.Where(s => s.Title.ToLower().Contains(titleSearchString));
+            }
             if (!String.IsNullOrEmpty(genreSearchString))
-                movieList = movieList.Where(s => s.Genre.Contains(genreSearchString));
+                movieList = movieList.Where(s => s.Genre.Equals(genreSearchString));
             return movieList;
         }
 
