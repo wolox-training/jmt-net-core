@@ -18,11 +18,7 @@ using TrainingNet.Repositories.Interfaces;
 
 namespace TrainingNet.Controllers
 {
-<<<<<<< 2dc5b258fac5e15f203db34330f24a3a69e41c15
     [Authorize]
-=======
-
->>>>>>> ID --> Id
     [Route("[controller]")]
     public class MovieController : Controller
     {
@@ -43,7 +39,6 @@ namespace TrainingNet.Controllers
         [HttpPost("Add")]
         public IActionResult Add(MovieViewModel movie)
         {
-<<<<<<< 2dc5b258fac5e15f203db34330f24a3a69e41c15
             if(ModelState.IsValid)
             {
                 UnitOfWork.MovieRepository.Add(new Movie(movieViewModel));
@@ -51,15 +46,6 @@ namespace TrainingNet.Controllers
                 return RedirectToAction("ListMovies");
             }
             return View(movieViewModel);
-=======
-            if (ModelState.IsValid)
-            {
-                UnitOfWork.MovieRepository.Add(new Movie(movie));
-                UnitOfWork.Complete();
-                return RedirectToAction("ListMovies");
-            }
-            return View(new MovieViewModel());
->>>>>>> ID --> Id
         }
 
         [HttpGet("EditMovie/{id}")]
@@ -145,13 +131,13 @@ namespace TrainingNet.Controllers
 
             try
             {
-                if (id == 0)
-                    throw new NullReferenceException("The movie was not found");
                 Movie movie = UnitOfWork.MovieRepository.Get(id);
+                if(movie == null)
+                    throw new NullReferenceException("the movie was not found");
                 Mailer.Send(userEmail, "Movie details", movie.ToString());
                 return RedirectToAction("ListMovies");
             }
-            catch (NullReferenceException n)
+            catch (NullReferenceException)
             {
                 return NotFound();
             }
