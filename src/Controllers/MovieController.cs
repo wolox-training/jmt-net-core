@@ -70,13 +70,18 @@ namespace TrainingNet.Controllers
         {
             try
             {
-                Movie movieToBeChanged = UnitOfWork.MovieRepository.Get(id);
-                if(movieToBeChanged == null)
-                    throw new NullReferenceException("The movie was not found");
-                movieToBeChanged.Update(movie);
-                UnitOfWork.MovieRepository.Update(movieToBeChanged);
-                UnitOfWork.Complete();
-                return RedirectToAction("ListMovies");
+                if(ModelState.IsValid)
+                {
+                    Movie movieToBeChanged = UnitOfWork.MovieRepository.Get(id);
+                    if(movieToBeChanged == null)
+                        throw new NullReferenceException("The movie was not found");
+                    movieToBeChanged.Update(movie);
+                    UnitOfWork.MovieRepository.Update(movieToBeChanged);
+                    UnitOfWork.Complete();
+                    return RedirectToAction("ListMovies");
+                }
+                else
+                    return View(movie);
             }
             catch (NullReferenceException)
             {
