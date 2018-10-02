@@ -106,8 +106,6 @@ namespace TrainingNet.Controllers
         // Descending order by title is the default, hence why it is returned when the string is null, empty or unknown value.
         private IEnumerable<MovieViewModel> getSortedMovies(string sortOrder, IEnumerable<MovieViewModel> movieList, bool descending)
         {
-            if (String.IsNullOrEmpty(sortOrder))
-                return movieList.OrderBy(s => s.Title);
             sortOrder = sortOrder.ToLower();
             switch (sortOrder)
             {
