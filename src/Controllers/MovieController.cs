@@ -39,7 +39,7 @@ namespace TrainingNet.Controllers
         [HttpPost("Add")]
         public IActionResult Add(MovieViewModel movieViewModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 UnitOfWork.MovieRepository.Add(new Movie(movieViewModel));
                 UnitOfWork.Complete();
@@ -54,7 +54,7 @@ namespace TrainingNet.Controllers
             try
             {
                 Movie movie = UnitOfWork.MovieRepository.Get(id);
-                if(movie == null)
+                if (movie == null)
                     throw new NullReferenceException("The movie was not found");
                 var movieViewModel = new MovieViewModel(movie);
                 return View(movieViewModel);
@@ -89,10 +89,58 @@ namespace TrainingNet.Controllers
             }
         }
 
+        [HttpGet("")]
         [HttpGet("ListMovies")]
-        public IActionResult ListMovies(string titleSearchString, string genreSearchString)
+        public IActionResult ListMovies(string titleSearchString, string genreSearchString, string sortOrder = "title", bool descending = false)
         {
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
+            movieList = getFilteredMovies(titleSearchString, genreSearchString, movieList);
+            movieList = getSortedMovies(sortOrder, movieList, descending);
+            MovieGenreViewModel movieGenreViewModel = new MovieGenreViewModel();
+            movieGenreViewModel.Movies = movieList;
+            movieGenreViewModel.Genres = new SelectList(UnitOfWork.MovieRepository.GetGenres().ToList());
+            ViewData["descending"] = !descending;
+            return View(movieGenreViewModel);
+        }
+
+        // Descending order by title is the default, hence why it is returned when the string is null, empty or unknown value.
+        private IEnumerable<MovieViewModel> getSortedMovies(string sortOrder, IEnumerable<MovieViewModel> movieList, bool descending)
+        {
+            sortOrder = sortOrder.ToLower();
+            switch (sortOrder)
+            {
+                case "title":
+                    if(descending)
+                        return movieList.OrderByDescending(s => s.Title);
+                    else
+                        return movieList.OrderBy(s => s.Title);
+                case "price":
+                    if(descending)
+                        return movieList.OrderByDescending(s => s.Price);
+                    else
+                        return movieList.OrderBy(s => s.Price);
+                case "genre":
+                    if(descending)
+                        return movieList.OrderByDescending(s => s.Genre);
+                    else
+                        return movieList.OrderBy(s => s.Genre);
+                case "rating":
+                    if(descending)
+                        return movieList.OrderByDescending(s => s.Rating);
+                    else
+                        return movieList.OrderBy(s => s.Rating);
+                case "release date":
+                    if(descending)
+                        return movieList.OrderByDescending(s => s.ReleaseDate);
+                    else
+                        return movieList.OrderBy(s => s.ReleaseDate);
+                default:
+                    return movieList.OrderBy(s => s.Title);
+            }
+        }
+
+        private IEnumerable<MovieViewModel> getFilteredMovies(string titleSearchString, string genreSearchString, IEnumerable<MovieViewModel> movieList)
+        {
             if (!String.IsNullOrEmpty(titleSearchString))
             {
                 titleSearchString = titleSearchString.ToLower();
@@ -100,17 +148,12 @@ namespace TrainingNet.Controllers
             }
             if (!String.IsNullOrEmpty(genreSearchString))
                 movieList = movieList.Where(s => s.Genre.Equals(genreSearchString));
-            MovieGenreViewModel movieGenreViewModel = new MovieGenreViewModel();
-            movieGenreViewModel.Movies = movieList;
-            movieGenreViewModel.Genres = new SelectList(UnitOfWork.MovieRepository.GetGenres().ToList());
-            return View(movieGenreViewModel);
+            return movieList;
         }
 
         [HttpGet("DeleteMovie/{id}")]
         public IActionResult DeleteMovie(int id)
         {
-            //el try catch está por las dudas porque no sé lo que pasa cuando trato
-            //de eliminar/gettear una película que no existe. Recordar preguntarlo.
             try
             {
                 if (id == 0)
@@ -133,7 +176,7 @@ namespace TrainingNet.Controllers
             try
             {
                 Movie movie = UnitOfWork.MovieRepository.Get(id);
-                if(movie == null)
+                if (movie == null)
                     throw new NullReferenceException("the movie was not found");
                 Mailer.Send(userEmail, "Movie details", movie.ToString());
                 return RedirectToAction("ListMovies");

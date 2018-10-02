@@ -6,19 +6,19 @@
     <thead>
         <tr>
                 <th>
-                    Title
+                    <a asp-action="ListMovies" asp-route-sortOrder="title" asp-route-descending=@ViewData["descending"]>Title</a>
                 </th>
                 <th>
-                    Release Date
+                    <a asp-action="ListMovies" asp-route-sortOrder="release date" asp-route-descending=@ViewData["descending"]>Release Date</a>
                 </th>
                 <th>
-                    Genre
+                    <a asp-action="ListMovies" asp-route-sortOrder="genre" asp-route-descending=@ViewData["descending"]>Genre</a>
                 </th>
                 <th>
-                    Price
+                    <a asp-action="ListMovies" asp-route-sortOrder="price" asp-route-descending=@ViewData["descending"]>Price</a>
                 </th>
                 <th>
-                    Rating
+                    <a asp-action="ListMovies" asp-route-sortOrder="rating" asp-route-descending=@ViewData["descending"]>Rating</a>
                 </th>
             <th></th>
         </tr>
@@ -51,13 +51,14 @@
     </tbody>
 
 </table>
-
-<form asp-controller="Movie" asp-action="ListMovies" method="get">
-    <p>
-        Title: <input type="text" name="titleSearchString">
-        <select asp-for="MovieGenre" asp-items="Model.Genres" name="genreSearchString">
-            <option value="">All</option>
-        </select>
+    <form asp-action="ListMovies" asp-controller="Movie" method="GET">
+        <p>
+            Title: <input type="text" name  ="titleSearchString">
+        </p>
+        <p>
+            Genre: @Html.DropDownList("genreSearchString", 
+                    Model.Genres, 
+                    "Select Genre")
+        </p>
         <input type="submit" value="Filter" />
-    </p>
 </form>
