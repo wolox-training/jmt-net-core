@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 using TrainingNet.Mail;
 using TrainingNet.Models;
 using TrainingNet.Models.DataBase;
@@ -81,6 +82,11 @@ namespace TrainingNet
                options.MinimumSameSitePolicy = SameSiteMode.None;
            });
 
+           services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
+
            Mailer.SetAccountConfiguration(Configuration);
         }
 
@@ -96,6 +102,12 @@ namespace TrainingNet
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

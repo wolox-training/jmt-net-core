@@ -3,18 +3,25 @@
 
 // Write your JavaScript code.
 $(function() {
-    $('.hola-button').click(function(){ 
-        alert("HOLA");
+    $(".comment-btn").click(function(){
+        addComment();
     });
-    var commentStr = $();
-    $.ajax {
-        url:"localhost/add",
-        data: {comment: commentStr},
-        success: function(){
-            
-        },
-        error: function(){
-
-        }
-    }
 });
+
+
+
+function addComment() {
+    $.ajax ({
+        type: 'POST',
+        url: '/api/v1/CommentApi/AddComment/' + $(".comment-btn").data().movieid,
+        data: {
+            comment: $("#userComment").val(),
+        },
+        success: function(response){
+            var ul = document.getElementById("commentList");
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(response.comment));
+            ul.appendChild(li);
+        },
+    });
+}
