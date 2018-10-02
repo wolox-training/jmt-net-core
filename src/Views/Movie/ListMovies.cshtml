@@ -6,22 +6,19 @@
     <thead>
         <tr>
                 <th>
-                    Title
+                    <a asp-action="ListMovies" asp-route-sortOrder="title">Title</a>
                 </th>
                 <th>
-                    Release Date
+                    <a asp-action="ListMovies" asp-route-sortOrder="release date">Release Date</a>
                 </th>
                 <th>
-                    Genre
+                    <a asp-action="ListMovies" asp-route-sortOrder="genre">Genre</a>
                 </th>
                 <th>
-                    Price
+                    <a asp-action="ListMovies" asp-route-sortOrder="price">Price</a>
                 </th>
                 <th>
-                    Rating
-                </th>
-                <th>
-                    Rating
+                    <a asp-action="ListMovies" asp-route-sortOrder="rating">Rating</a>
                 </th>
             <th></th>
         </tr>
@@ -59,7 +56,9 @@
             Title: <input type="text" name  ="titleSearchString">
         </p>
         <p>
-            Genre: <input type="text" name  ="genreSearchString">
+            Genre: @Html.DropDownList("genreSearchString", 
+                    Model.Genres, 
+                    "Select Genre")
         </p>
         <p>
             Sort by: <input type="text" name ="sortOrder">
