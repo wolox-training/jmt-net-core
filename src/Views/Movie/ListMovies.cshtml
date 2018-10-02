@@ -6,19 +6,19 @@
     <thead>
         <tr>
                 <th>
-                    <a asp-action="ListMovies" asp-route-sortOrder="title">Title</a>
+                    <a asp-action="ListMovies" asp-route-sortOrder="title" asp-route-descending=@ViewData["descending"]>Title</a>
                 </th>
                 <th>
-                    <a asp-action="ListMovies" asp-route-sortOrder="release date">Release Date</a>
+                    <a asp-action="ListMovies" asp-route-sortOrder="release date" asp-route-descending=@ViewData["descending"]>Release Date</a>
                 </th>
                 <th>
-                    <a asp-action="ListMovies" asp-route-sortOrder="genre">Genre</a>
+                    <a asp-action="ListMovies" asp-route-sortOrder="genre" asp-route-descending=@ViewData["descending"]>Genre</a>
                 </th>
                 <th>
-                    <a asp-action="ListMovies" asp-route-sortOrder="price">Price</a>
+                    <a asp-action="ListMovies" asp-route-sortOrder="price" asp-route-descending=@ViewData["descending"]>Price</a>
                 </th>
                 <th>
-                    <a asp-action="ListMovies" asp-route-sortOrder="rating">Rating</a>
+                    <a asp-action="ListMovies" asp-route-sortOrder="rating" asp-route-descending=@ViewData["descending"]>Rating</a>
                 </th>
             <th></th>
         </tr>

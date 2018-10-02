@@ -91,19 +91,20 @@ namespace TrainingNet.Controllers
 
         [HttpGet("")]
         [HttpGet("ListMovies")]
-        public IActionResult ListMovies(string titleSearchString, string genreSearchString, string sortOrder)
+        public IActionResult ListMovies(string titleSearchString, string genreSearchString, string sortOrder, bool descending = false)
         {
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
             movieList = getFilteredMovies(titleSearchString, genreSearchString, movieList);
-            movieList = getSortedMovies(sortOrder, movieList);
+            movieList = getSortedMovies(sortOrder, movieList, descending);
             MovieGenreViewModel movieGenreViewModel = new MovieGenreViewModel();
             movieGenreViewModel.Movies = movieList;
             movieGenreViewModel.Genres = new SelectList(UnitOfWork.MovieRepository.GetGenres().ToList());
+            ViewData["descending"] = !descending;
             return View(movieGenreViewModel);
         }
 
         // Descending order by title is the default, hence why it is returned when the string is null, empty or unknown value.
-        private IEnumerable<MovieViewModel> getSortedMovies(string sortOrder, IEnumerable<MovieViewModel> movieList)
+        private IEnumerable<MovieViewModel> getSortedMovies(string sortOrder, IEnumerable<MovieViewModel> movieList, bool descending)
         {
             if (String.IsNullOrEmpty(sortOrder))
                 return movieList.OrderBy(s => s.Title);
@@ -111,15 +112,30 @@ namespace TrainingNet.Controllers
             switch (sortOrder)
             {
                 case "title":
-                    return movieList.OrderBy(s => s.Title);
+                    if(descending)
+                        return movieList.OrderByDescending(s => s.Title);
+                    else
+                        return movieList.OrderBy(s => s.Title);
                 case "price":
-                    return movieList.OrderByDescending(s => s.Price);
+                    if(descending)
+                        return movieList.OrderByDescending(s => s.Price);
+                    else
+                        return movieList.OrderBy(s => s.Price);
                 case "genre":
-                    return movieList.OrderBy(s => s.Genre);
+                    if(descending)
+                        return movieList.OrderByDescending(s => s.Genre);
+                    else
+                        return movieList.OrderBy(s => s.Genre);
                 case "rating":
-                    return movieList.OrderBy(s => s.Rating);
+                    if(descending)
+                        return movieList.OrderByDescending(s => s.Rating);
+                    else
+                        return movieList.OrderBy(s => s.Rating);
                 case "release date":
-                    return movieList.OrderBy(s => s.ReleaseDate);
+                    if(descending)
+                        return movieList.OrderByDescending(s => s.ReleaseDate);
+                    else
+                        return movieList.OrderBy(s => s.ReleaseDate);
                 default:
                     return movieList.OrderBy(s => s.Title);
             }
