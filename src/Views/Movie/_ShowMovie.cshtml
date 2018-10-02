@@ -6,18 +6,23 @@
         @Html.HiddenFor(m => m.Id)
         <div class="form-group">
             Title: @Html.EditorFor(m => m.Title)
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="form-group">
             Release date: @Html.EditorFor(m => m.ReleaseDate)
+            <span asp-validation-for="ReleaseDate" class="text-danger"></span>
         </div>
         <div class="form-group">
             Genre: @Html.EditorFor(m => m.Genre)
+            <span asp-validation-for="Genre" class="text-danger"></span>
         </div>
         <div class="form-group">
             Price: @Html.EditorFor(m => m.Price)
+            <span asp-validation-for="Price" class="text-danger"></span>
         </div>
         <div class="form-group">
             Rating: @Html.EditorFor(m => m.Rating)
+            <span asp-validation-for="Rating" class="text-danger"></span>
         </div>
     </div>
 
