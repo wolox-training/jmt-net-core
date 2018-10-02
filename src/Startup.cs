@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TrainingNet.Mail;
 using TrainingNet.Models;
 using TrainingNet.Models.DataBase;
 using TrainingNet.Repositories.Database;
@@ -79,6 +80,8 @@ namespace TrainingNet
                options.CheckConsentNeeded = context => true;
                options.MinimumSameSitePolicy = SameSiteMode.None;
            });
+
+           Mailer.SetAccountConfiguration(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
