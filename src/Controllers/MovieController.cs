@@ -91,7 +91,7 @@ namespace TrainingNet.Controllers
 
         [HttpGet("")]
         [HttpGet("ListMovies")]
-        public IActionResult ListMovies(string titleSearchString, string genreSearchString, string sortOrder, bool descending = false)
+        public IActionResult ListMovies(string titleSearchString, string genreSearchString, string sortOrder = "title", bool descending = false)
         {
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
             movieList = getFilteredMovies(titleSearchString, genreSearchString, movieList);
