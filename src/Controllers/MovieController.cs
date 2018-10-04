@@ -111,8 +111,10 @@ namespace TrainingNet.Controllers
             else if (String.IsNullOrEmpty(genreSearchString))
                 genreSearchString = currentGenreFilter;
             else
+            {
                 titleSearchString = currentTitleFilter;
-            genreSearchString = currentGenreFilter;
+                genreSearchString = currentGenreFilter;
+            }
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
             movieList = getFilteredMovies(titleSearchString, genreSearchString, movieList).AsQueryable();
             movieList = getSortedMovies(sortOrder, movieList, descending).AsQueryable();
