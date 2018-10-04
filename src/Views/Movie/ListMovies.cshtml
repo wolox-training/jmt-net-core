@@ -58,7 +58,8 @@
 <a asp-action="ListMovies"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-page="@(Model.Movies.PageIndex - 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-currentGenreFilter="@ViewData["CurrentGenreFilter"]"
+   asp-route-currentTitleFilter="@ViewData["CurrentTitleFilter"]"
    asp-route-descending ="@ViewData["descending"]"
    class="btn btn-default @prevDisabled">
     Previous
@@ -66,7 +67,8 @@
 <a asp-action="ListMovies"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-page="@(Model.Movies.PageIndex + 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-currentGenreFilter="@ViewData["CurrentGenreFilter"]"
+   asp-route-currentTitleFilter="@ViewData["CurrentTitleFilter"]"
    asp-route-descending ="@ViewData["descending"]"
    class="btn btn-default @nextDisabled">
     Next

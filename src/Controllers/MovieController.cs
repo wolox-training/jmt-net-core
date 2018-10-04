@@ -122,6 +122,8 @@ namespace TrainingNet.Controllers
             movieGenreViewModel.Movies = PaginatedList<MovieViewModel>.Create(movieList.AsQueryable(), page, pageSize);
             movieGenreViewModel.Genres = new SelectList(UnitOfWork.MovieRepository.GetGenres().ToList());
             ViewData["descending"] = descending;
+            ViewData["CurrentGenreFilter"] = genreSearchString;
+            ViewData["CurrentTitleFilter"] = titleSearchString;
             return View(movieGenreViewModel);
         }
 
