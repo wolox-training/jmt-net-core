@@ -57,7 +57,7 @@ namespace TrainingNet.Controllers
         {
             try
             {
-                Movie movie = UnitOfWork.MovieRepository.Get(id);
+                Movie movie = UnitOfWork.MovieRepository.GetMovieWithComments(id);
                 if (movie == null)
                     throw new NullReferenceException("The movie was not found");
                 var movieViewModel = new MovieViewModel(movie);
