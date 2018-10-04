@@ -10,15 +10,15 @@ using TrainingNet.Repositories.Database;
 namespace TrainingNet.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20180924154915_syntaxProblem")]
-    partial class syntaxProblem
+    [Migration("20181004161630_everyone")]
+    partial class everyone
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

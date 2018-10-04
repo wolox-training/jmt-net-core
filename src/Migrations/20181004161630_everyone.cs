@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace TrainingNet.Migrations
 {
-    public partial class Everyone : Migration
+    public partial class everyone : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -176,15 +176,15 @@ namespace TrainingNet.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    content = table.Column<string>(nullable: true),
-                    movieId = table.Column<int>(nullable: true)
+                    Content = table.Column<string>(nullable: true),
+                    MovieId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Movies_movieId",
-                        column: x => x.movieId,
+                        name: "FK_Comments_Movies_MovieId",
+                        column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -228,9 +228,9 @@ namespace TrainingNet.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_movieId",
+                name: "IX_Comments_MovieId",
                 table: "Comments",
-                column: "movieId");
+                column: "MovieId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
