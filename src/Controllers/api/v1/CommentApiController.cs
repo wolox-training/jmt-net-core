@@ -1,5 +1,5 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Web.Http;
 using TrainingNet.Models.DataBase;
 using TrainingNet.Repositories.Interfaces;

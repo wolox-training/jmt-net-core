@@ -18,10 +18,10 @@ function addComment() {
             comment: $("#userComment").val(),
         },
         success: function(response){
-            var ul = document.getElementById("commentList");
-            var li = document.createElement("li");
-            li.appendChild(document.createTextNode(response.comment));
-            ul.appendChild(li);
+            var ul = $("#commentList");
+            var li = $("<li></li>");
+            li.append(document.createTextNode(response.comment));
+            ul.append(li);
         },
     });
 }

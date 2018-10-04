@@ -76,16 +76,16 @@ namespace TrainingNet
             });
 
             services.Configure<CookiePolicyOptions>(options =>
-           {
+            {
                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                options.CheckConsentNeeded = context => true;
                options.MinimumSameSitePolicy = SameSiteMode.None;
-           });
+            });
 
            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-            });
+           {
+                c.SwaggerDoc("v1", new Info { Title = "api", Version = "v1" });
+           });
 
            Mailer.SetAccountConfiguration(Configuration);
         }
@@ -106,7 +106,7 @@ namespace TrainingNet
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "api/v1");
             });
 
             app.UseHttpsRedirection();
