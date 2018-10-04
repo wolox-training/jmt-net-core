@@ -101,8 +101,8 @@ namespace TrainingNet.Controllers
                                         string sortOrder = "title", bool descending = false)
         {
             ViewData["CurrentSort"] = sortOrder;
-            if (!String.IsNullOrEmpty(titleSearchString) || !String.IsNullOrEmpty(genreSearchString) || !String.IsNullOrEmpty(sortOrder))
-                page = 1;
+            if (!String.IsNullOrEmpty(titleSearchString) || !String.IsNullOrEmpty(genreSearchString))
+                page = DEFAULT_STARTING_PAGE;
             else if (String.IsNullOrEmpty(titleSearchString) && String.IsNullOrEmpty(genreSearchString))
             {
                 titleSearchString = currentTitleFilter;
@@ -113,19 +113,13 @@ namespace TrainingNet.Controllers
             else
                 titleSearchString = currentTitleFilter;
             genreSearchString = currentGenreFilter;
-
-
-
-
-
-
             var movieList = UnitOfWork.MovieRepository.GetAll().Select(s => new MovieViewModel(s));
-            movieList = getFilteredMovies(titleSearchString, genreSearchString, movieList);
-            movieList = getSortedMovies(sortOrder, movieList, descending);
+            movieList = getFilteredMovies(titleSearchString, genreSearchString, movieList).AsQueryable();
+            movieList = getSortedMovies(sortOrder, movieList, descending).AsQueryable();
             MovieGenreViewModel movieGenreViewModel = new MovieGenreViewModel();
-            movieGenreViewModel.Movies = movieList;
+            movieGenreViewModel.Movies = PaginatedList<MovieViewModel>.Create(movieList.AsQueryable(), page, pageSize);
             movieGenreViewModel.Genres = new SelectList(UnitOfWork.MovieRepository.GetGenres().ToList());
-            ViewData["descending"] = !descending;
+            ViewData["descending"] = descending;
             return View(movieGenreViewModel);
         }
 
@@ -165,7 +159,7 @@ namespace TrainingNet.Controllers
             }
         }
 
-        private IQueryable<MovieViewModel> getFilteredMovies(string titleSearchString, string genreSearchString, IQueryable<MovieViewModel> movieList)
+        private IEnumerable<MovieViewModel> getFilteredMovies(string titleSearchString, string genreSearchString, IEnumerable<MovieViewModel> movieList)
         {
             if (!String.IsNullOrEmpty(titleSearchString))
             {

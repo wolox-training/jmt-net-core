@@ -6,25 +6,19 @@
     <thead>
         <tr>
                 <th>
-                    <a asp-action="ListMovies" asp-route-sortOrder="title" asp-route-descending=@ViewData["descending"]>Title</a>
+                    <a asp-action="ListMovies" asp-route-sortOrder="title" asp-route-descending=@(!(bool)ViewData["descending"])>Title</a>
                 </th>
                 <th>
-                    <a asp-action="ListMovies" asp-route-sortOrder="release date" asp-route-descending=@ViewData["descending"]>Release Date</a>
+                    <a asp-action="ListMovies" asp-route-sortOrder="release date" asp-route-descending=@(!(bool)ViewData["descending"])>Release Date</a>
                 </th>
                 <th>
-                    <a asp-action="ListMovies" asp-route-sortOrder="genre" asp-route-descending=@ViewData["descending"]>Genre</a>
+                    <a asp-action="ListMovies" asp-route-sortOrder="genre" asp-route-descending=@(!(bool)ViewData["descending"])>Genre</a>
                 </th>
                 <th>
-                    <a asp-action="ListMovies" asp-route-sortOrder="price" asp-route-descending=@ViewData["descending"]>Price</a>
+                    <a asp-action="ListMovies" asp-route-sortOrder="price" asp-route-descending=@(!(bool)ViewData["descending"])>Price</a>
                 </th>
                 <th>
-                    <a asp-action="ListMovies" asp-route-sortOrder="rating" asp-route-descending=@ViewData["descending"]>Rating</a>
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Rating)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Rating)
+                    <a asp-action="ListMovies" asp-route-sortOrder="rating" asp-route-descending=@(!(bool)ViewData["descending"])>Rating</a>
                 </th>
             <th></th>
         </tr>
@@ -57,37 +51,39 @@
     </tbody>
 
 @{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var prevDisabled = !Model.Movies.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Movies.HasNextPage ? "disabled" : "";
 }
 
 <a asp-action="ListMovies"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-page="@(Model.PageIndex - 1)"
+   asp-route-page="@(Model.Movies.PageIndex - 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-descending ="@ViewData["descending"]"
    class="btn btn-default @prevDisabled">
     Previous
 </a>
 <a asp-action="ListMovies"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-page="@(Model.PageIndex + 1)"
+   asp-route-page="@(Model.Movies.PageIndex + 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-descending ="@ViewData["descending"]"
    class="btn btn-default @nextDisabled">
     Next
 </a>
 
 </table>
-    <form asp-action="ListMovies" asp-controller="Movie" method="GET">
-        <p>
-            Title: <input type="text" name  ="titleSearchString">
-        </p>
-        <p>
-            Genre: @Html.DropDownList("genreSearchString", 
-                    Model.Genres, 
-                    "Select Genre")
-        </p>
-        <p>
-            Sort by: <input type="text" name ="sortOrder">
-        </p>
-        <input type="submit" value="Filter" />
+<form asp-action="ListMovies" asp-controller="Movie" method="GET">
+    <p>
+        Title: <input type="text" name  ="titleSearchString">
+    </p>
+    <p>
+        Genre: @Html.DropDownList("genreSearchString", 
+                Model.Genres, 
+                "Select Genre")
+    </p>
+    <p>
+        Sort by: <input type="text" name ="sortOrder">
+    </p>
+    <input type="submit" value="Filter" />
 </form>
