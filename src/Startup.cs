@@ -100,7 +100,7 @@ namespace TrainingNet
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
+                //app.UseHsts();
             }
 
             app.UseSwagger();
@@ -109,7 +109,7 @@ namespace TrainingNet
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "TrainingNetApi");
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
@@ -119,6 +119,12 @@ namespace TrainingNet
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+               var context = serviceScope.ServiceProvider.GetService<DataBaseContext>();
+               context.Database.Migrate();
+            }
 
         }
     }
