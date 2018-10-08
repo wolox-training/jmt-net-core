@@ -11,6 +11,7 @@ namespace TrainingNet.Models.DataBase
             this.movie = movie;
             this.content = content;
         }
+        
         public int Id { get; set; }
         public string content { get; set; }
         public virtual Movie movie { get; set; }

@@ -199,9 +199,9 @@ namespace TrainingNet.Controllers
         {
             try
             {
-                if (id == 0)
-                    throw new NullReferenceException("The movie was not found");
                 Movie movie = UnitOfWork.MovieRepository.Get(id);
+                if(movie == null)
+                    throw new NullReferenceException("The movie was not found");
                 UnitOfWork.MovieRepository.Remove(movie);
                 UnitOfWork.Complete();
                 return RedirectToAction("ListMovies");
