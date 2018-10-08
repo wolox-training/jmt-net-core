@@ -10,15 +10,15 @@ using TrainingNet.Repositories.Database;
 namespace TrainingNet.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20181008152446_Everyone")]
-    partial class Everyone
+    [Migration("20180924154915_syntaxProblem")]
+    partial class syntaxProblem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -183,13 +183,13 @@ namespace TrainingNet.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("content");
+                    b.Property<string>("Content");
 
-                    b.Property<int?>("movieId");
+                    b.Property<int?>("MovieId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("movieId");
+                    b.HasIndex("MovieId");
 
                     b.ToTable("Comments");
                 });
@@ -261,9 +261,9 @@ namespace TrainingNet.Migrations
 
             modelBuilder.Entity("TrainingNet.Models.DataBase.Comment", b =>
                 {
-                    b.HasOne("TrainingNet.Models.DataBase.Movie", "movie")
+                    b.HasOne("TrainingNet.Models.DataBase.Movie", "Movie")
                         .WithMany("Comments")
-                        .HasForeignKey("movieId");
+                        .HasForeignKey("MovieId");
                 });
 #pragma warning restore 612, 618
         }
