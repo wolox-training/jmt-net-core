@@ -1,0 +1,38 @@
+@using TrainingNet.Models.Views
+@using TrainingNet.Models.DataBase
+@model MovieViewModel
+
+
+<div class="form-horizontal">
+    <div class="form-group">
+        Title: @Html.DisplayFor(m => m.Title)
+    </div>
+    <div class="form-group">
+        Release date: @Html.DisplayFor(m => m.ReleaseDate)
+    </div>
+    <div class="form-group">
+        Genre: @Html.DisplayFor(m => m.Genre)
+    </div>
+    <div class="form-group">
+        Price: @Html.DisplayFor(m => m.Price)
+    </div>
+    <div class="form-group">
+        Rating: @Html.DisplayFor(m => m.Rating)
+    </div>
+</div>
+
+<form asp-action="Email" asp-controller="Movie">
+    <p>
+        Send an email about this movie to: <input type="text" name="userEmail">
+        <input type="submit" value="Send" />
+    </p>
+</form>
+
+<ul>
+    @foreach (Comment comment in Model.Comments)
+    {
+        <li>
+            @Html.DisplayFor(item => comment.content)
+        </li>
+    }
+</ul>

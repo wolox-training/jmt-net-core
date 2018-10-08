@@ -230,6 +230,21 @@ namespace TrainingNet.Controllers
             }
         }
 
+        [HttpGet("Details/{id}")]
+        public IActionResult Details(int id){
+            try
+            {    
+                MovieViewModel movie = new MovieViewModel(UnitOfWork.MovieRepository.GetMovieWithComments(id));
+                if(movie == null)
+                    throw new NullReferenceException("The movie was not found");
+                return View(movie);
+            }
+            catch(NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
+
         private IUnitOfWork UnitOfWork
         {
             get { return this._unitOfWork; }
