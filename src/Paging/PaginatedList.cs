@@ -35,17 +35,10 @@ namespace TrainingNet.Paging
             }
         }
 
-<<<<<<< f29b757d648da2da8445be3eedc629b8329ffb1f
         public static PaginatedList<T> Create(IQueryable<T> source, int pageIndex, int pageSize)
         {
             var count = source.Count();
             var items = source.Skip((pageIndex) * pageSize).Take(pageSize).ToList();
-=======
-        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
-        {
-            var count = await source.CountAsync();
-            var items = await source.Skip((pageIndex) * pageSize).Take(pageSize).ToListAsync();
->>>>>>> no anda aun, me tira error al entrar en list movies pero no me dice donde
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
     }

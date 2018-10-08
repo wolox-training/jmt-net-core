@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace TrainingNet.Migrations
 {
-    public partial class everyone : Migration
+    public partial class Everyone : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

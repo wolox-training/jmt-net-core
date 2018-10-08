@@ -10,8 +10,8 @@ using TrainingNet.Repositories.Database;
 namespace TrainingNet.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20181004161630_everyone")]
-    partial class everyone
+    [Migration("20181008151749_Everyone")]
+    partial class Everyone
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
