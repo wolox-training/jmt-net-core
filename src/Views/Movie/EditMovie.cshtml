@@ -5,23 +5,15 @@
 <h2>Edit movie</h2>
 
 @Html.Partial("_ShowMovie")
-
-<form asp-action="Email" asp-controller="Movie">
-    <p>
-        Send an email about this movie to: <input type="text" name="userEmail">
-        <input type="submit" value="Send" />
-    </p>
-</form>
-<form asp-action="AddComment" asp-controller="Movie">
-    <textarea class="form-control" 
-            cols="20" 
-            id="comment"
-            name="comment"
-            rows="2">Tell us what you thought...</textarea>
-    <input type="submit" value="Send" />
-</form>
-<ul>
-    @foreach (Comment comment in Model.Comments){
+<textarea id="userComment" 
+        cols="20"
+        name="comment"
+        rows="2"
+        placeholder="Tell us what you thought..."></textarea>
+<a class="btn comment-btn" data-movieId="@Model.Id">send</a>
+<ul id="commentList">
+    @foreach (Comment comment in Model.Comments)
+    {
         <li>
             @Html.DisplayFor(item => comment.content)
         </li>

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TrainingNet.Repositories.Database;
@@ -9,9 +10,10 @@ using TrainingNet.Repositories.Database;
 namespace TrainingNet.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20180921162244_Comment")]
+    partial class Comment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -181,13 +183,13 @@ namespace TrainingNet.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Content");
+                    b.Property<string>("content");
 
                     b.Property<int>("movieId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("movieId");
 
                     b.ToTable("Comment");
                 });
@@ -259,7 +261,7 @@ namespace TrainingNet.Migrations
 
             modelBuilder.Entity("TrainingNet.Models.DataBase.Comment", b =>
                 {
-                    b.HasOne("TrainingNet.Models.DataBase.Movie", "Movie")
+                    b.HasOne("TrainingNet.Models.DataBase.Movie", "movie")
                         .WithMany("Comments")
                         .HasForeignKey("movieId")
                         .OnDelete(DeleteBehavior.Cascade);

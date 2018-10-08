@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 using TrainingNet.Mail;
 using TrainingNet.Models;
 using TrainingNet.Models.DataBase;
@@ -75,10 +76,15 @@ namespace TrainingNet
             });
 
             services.Configure<CookiePolicyOptions>(options =>
-           {
+            {
                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                options.CheckConsentNeeded = context => true;
                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+           services.AddSwaggerGen(c =>
+           {
+                c.SwaggerDoc("v1", new Info { Title = "TrainingNetApi", Version = "v1" });
            });
 
            Mailer.SetAccountConfiguration(Configuration);
@@ -96,6 +102,12 @@ namespace TrainingNet
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TrainingNetApi");
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

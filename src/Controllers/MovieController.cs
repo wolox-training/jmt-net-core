@@ -93,6 +93,21 @@ namespace TrainingNet.Controllers
             }
         }
 
+        [HttpGet("Details/{id}")]
+        public IActionResult Details(int id){
+            try
+            {
+                MovieViewModel movie = new MovieViewModel(UnitOfWork.MovieRepository.GetMovieWithComments(id));
+                if(movie == null)
+                    throw new NullReferenceException("The movie was not found");
+                return View(movie);
+            }
+            catch(NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
+
         [HttpPost("AddComment/{id}")]
         public IActionResult AddComment(int id, string comment)
         {
@@ -225,21 +240,6 @@ namespace TrainingNet.Controllers
                 return RedirectToAction("ListMovies");
             }
             catch (NullReferenceException)
-            {
-                return NotFound();
-            }
-        }
-
-        [HttpGet("Details/{id}")]
-        public IActionResult Details(int id){
-            try
-            {    
-                MovieViewModel movie = new MovieViewModel(UnitOfWork.MovieRepository.GetMovieWithComments(id));
-                if(movie == null)
-                    throw new NullReferenceException("The movie was not found");
-                return View(movie);
-            }
-            catch(NullReferenceException)
             {
                 return NotFound();
             }
