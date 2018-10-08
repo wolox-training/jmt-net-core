@@ -16,7 +16,7 @@ namespace TrainingNet.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -183,13 +183,13 @@ namespace TrainingNet.Migrations
 
                     b.Property<string>("Content");
 
-                    b.Property<int>("movieId");
+                    b.Property<int?>("MovieId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("Comment");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("TrainingNet.Models.DataBase.Movie", b =>
@@ -261,8 +261,7 @@ namespace TrainingNet.Migrations
                 {
                     b.HasOne("TrainingNet.Models.DataBase.Movie", "Movie")
                         .WithMany("Comments")
-                        .HasForeignKey("movieId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("MovieId");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,12 +9,12 @@ namespace TrainingNet.Models.DataBase
         
         public Comment(Movie movie, string content)
         {
-            this.movie = movie;
-            this.content = content;
+            this.Movie = movie;
+            this.Content = content;
         }
 
         public int Id { get; set; }
-        public string content { get; set; }
-        public virtual Movie movie { get; set; }
+        public string Content { get; set; }
+        public virtual Movie Movie { get; set; }
     }
 }

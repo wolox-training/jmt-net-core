@@ -2,7 +2,7 @@
 
 namespace TrainingNet.Migrations
 {
-    public partial class syntaxProblem : Migration
+    public partial class syntaxCorrection : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
