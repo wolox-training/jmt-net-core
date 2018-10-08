@@ -97,9 +97,9 @@ namespace TrainingNet.Controllers
         public IActionResult Details(int id){
             try
             {
-                if(id == 0)
-                    throw new NullReferenceException("The movie was not found");
                 MovieViewModel movie = new MovieViewModel(UnitOfWork.MovieRepository.GetMovieWithComments(id));
+                if(movie == null)
+                    throw new NullReferenceException("The movie was not found");
                 return View(movie);
             }
             catch(NullReferenceException)
