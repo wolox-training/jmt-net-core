@@ -181,13 +181,13 @@ namespace TrainingNet.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Content");
+                    b.Property<string>("content");
 
                     b.Property<int?>("movieId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("movieId");
 
                     b.ToTable("Comments");
                 });
@@ -259,7 +259,7 @@ namespace TrainingNet.Migrations
 
             modelBuilder.Entity("TrainingNet.Models.DataBase.Comment", b =>
                 {
-                    b.HasOne("TrainingNet.Models.DataBase.Movie", "Movie")
+                    b.HasOne("TrainingNet.Models.DataBase.Movie", "movie")
                         .WithMany("Comments")
                         .HasForeignKey("movieId");
                 });
