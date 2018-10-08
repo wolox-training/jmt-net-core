@@ -98,9 +98,9 @@ namespace TrainingNet.Controllers
         {
             try
             {
-                if (id == 0)
-                    throw new NullReferenceException("The movie was not found");
                 Movie movieToBeChanged = UnitOfWork.MovieRepository.GetMovieWithComments(id);
+                if(movieToBeChanged == null)
+                    throw new NullReferenceException("The movie was not found");
                 movieToBeChanged.Comments.Add(new Comment(movieToBeChanged, comment));
                 UnitOfWork.MovieRepository.Update(movieToBeChanged);
                 UnitOfWork.Complete();
