@@ -176,15 +176,15 @@ namespace TrainingNet.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Content = table.Column<string>(nullable: true),
-                    MovieId = table.Column<int>(nullable: true)
+                    content = table.Column<string>(nullable: true),
+                    movieId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Movies_MovieId",
-                        column: x => x.MovieId,
+                        name: "FK_Comments_Movies_movieId",
+                        column: x => x.movieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -228,9 +228,9 @@ namespace TrainingNet.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_MovieId",
+                name: "IX_Comments_movieId",
                 table: "Comments",
-                column: "MovieId");
+                column: "movieId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

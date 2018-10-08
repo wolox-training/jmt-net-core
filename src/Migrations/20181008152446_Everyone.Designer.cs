@@ -10,7 +10,7 @@ using TrainingNet.Repositories.Database;
 namespace TrainingNet.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20181008151749_Everyone")]
+    [Migration("20181008152446_Everyone")]
     partial class Everyone
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,13 +183,13 @@ namespace TrainingNet.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Content");
+                    b.Property<string>("content");
 
-                    b.Property<int?>("MovieId");
+                    b.Property<int?>("movieId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("movieId");
 
                     b.ToTable("Comments");
                 });
@@ -261,9 +261,9 @@ namespace TrainingNet.Migrations
 
             modelBuilder.Entity("TrainingNet.Models.DataBase.Comment", b =>
                 {
-                    b.HasOne("TrainingNet.Models.DataBase.Movie", "Movie")
+                    b.HasOne("TrainingNet.Models.DataBase.Movie", "movie")
                         .WithMany("Comments")
-                        .HasForeignKey("MovieId");
+                        .HasForeignKey("movieId");
                 });
 #pragma warning restore 612, 618
         }
