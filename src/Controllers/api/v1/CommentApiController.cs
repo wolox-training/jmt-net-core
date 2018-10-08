@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Web.Http;
+using Microsoft.AspNetCore.Mvc;
 using TrainingNet.Models.DataBase;
 using TrainingNet.Repositories.Interfaces;
 

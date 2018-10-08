@@ -11,9 +11,10 @@ $(function() {
 
 
 function addComment() {
+    movieId = $(".comment-btn").data().movieid;
     $.ajax ({
         type: 'POST',
-        url: '/api/v1/CommentApi/AddComment/' + $(".comment-btn").data().movieid,
+        url: `/api/v1/CommentApi/AddComment/${movieId}`,
         data: {
             comment: $("#userComment").val(),
         },

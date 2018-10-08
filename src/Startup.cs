@@ -84,7 +84,7 @@ namespace TrainingNet
 
            services.AddSwaggerGen(c =>
            {
-                c.SwaggerDoc("v1", new Info { Title = "api", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "TrainingNetApi", Version = "v1" });
            });
 
            Mailer.SetAccountConfiguration(Configuration);
@@ -106,7 +106,7 @@ namespace TrainingNet
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "api/v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "TrainingNetApi");
             });
 
             app.UseHttpsRedirection();
