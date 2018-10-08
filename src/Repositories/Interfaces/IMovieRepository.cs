@@ -9,5 +9,7 @@ namespace TrainingNet.Repositories.Interfaces
     public interface IMovieRepository: IRepository<Movie>
     {
         IQueryable<String> GetGenres();
+
+        Movie GetMovieWithComments(int id);
     }
 }

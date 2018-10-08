@@ -8,6 +8,7 @@ namespace TrainingNet.Repositories.Interfaces
     {
         IMovieRepository MovieRepository { get; }
         IUserRepository UserRepository { get; }
+        ICommentRepository CommentRepository { get; }
         int Complete();
     }
 }

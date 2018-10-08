@@ -1,4 +1,6 @@
-@Model 
+@using TrainingNet.Models.Views
+@using TrainingNet.Models.DataBase
+@Model MovieViewModel
 
 <h2>Edit movie</h2>
 
@@ -10,3 +12,18 @@
         <input type="submit" value="Send" />
     </p>
 </form>
+<form asp-action="AddComment" asp-controller="Movie">
+    <textarea class="form-control" 
+            cols="20" 
+            id="comment"
+            name="comment"
+            rows="2">Tell us what you thought...</textarea>
+    <input type="submit" value="Send" />
+</form>
+<ul>
+    @foreach (Comment comment in Model.Comments){
+        <li>
+            @Html.DisplayFor(item => comment.content)
+        </li>
+    }
+</ul>

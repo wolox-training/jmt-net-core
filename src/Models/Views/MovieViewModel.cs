@@ -18,6 +18,7 @@ namespace TrainingNet.Models.Views
             Genre = movie.Genre;
             Title = movie.Title;
             Rating = movie.Rating;
+            Comments = movie.Comments;
         }
         
         public int Id { get; set; }

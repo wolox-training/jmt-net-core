@@ -57,7 +57,7 @@ namespace TrainingNet.Controllers
         {
             try
             {
-                Movie movie = UnitOfWork.MovieRepository.Get(id);
+                Movie movie = UnitOfWork.MovieRepository.GetMovieWithComments(id);
                 if (movie == null)
                     throw new NullReferenceException("The movie was not found");
                 var movieViewModel = new MovieViewModel(movie);
@@ -86,6 +86,25 @@ namespace TrainingNet.Controllers
                 }
                 else
                     return View(movie);
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost("AddComment/{id}")]
+        public IActionResult AddComment(int id, string comment)
+        {
+            try
+            {
+                Movie movieToBeChanged = UnitOfWork.MovieRepository.GetMovieWithComments(id);
+                if(movieToBeChanged == null)
+                    throw new NullReferenceException("The movie was not found");
+                movieToBeChanged.Comments.Add(new Comment(movieToBeChanged, comment));
+                UnitOfWork.MovieRepository.Update(movieToBeChanged);
+                UnitOfWork.Complete();
+                return RedirectToAction("ListMovies");
             }
             catch (NullReferenceException)
             {
@@ -180,9 +199,9 @@ namespace TrainingNet.Controllers
         {
             try
             {
-                if (id == 0)
-                    throw new NullReferenceException("The movie was not found");
                 Movie movie = UnitOfWork.MovieRepository.Get(id);
+                if(movie == null)
+                    throw new NullReferenceException("The movie was not found");
                 UnitOfWork.MovieRepository.Remove(movie);
                 UnitOfWork.Complete();
                 return RedirectToAction("ListMovies");
